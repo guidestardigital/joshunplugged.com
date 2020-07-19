@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:12
 
 # Create app directory
 WORKDIR /app
@@ -9,7 +9,7 @@ RUN yarn
 
 ARG BLOG_API_DOMAIN=https://api.myblogdomain.com
 ENV BLOG_API_DOMAIN=$BLOG_API_DOMAIN
-RUN STRAPI_BASE_URL=$BLOG_API_DOMAIN yarn build
+RUN STRAPI_BASE_URL=https://api.perspectiveswithjosh.com yarn build
 
 ENV HOST 0.0.0.0
 EXPOSE 3000

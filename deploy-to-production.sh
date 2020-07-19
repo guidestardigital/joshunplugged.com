@@ -27,6 +27,9 @@ ssh $BLOG_SERVER << EOF
   mkdir -p $BLOG_HOME
 EOF
 
+# Copy .env
+rsync -r -v ./.env.prod $BLOG_SERVER:$BLOG_HOME/.env
+
 # Start SH file -> AWS
 rsync -r -v ./start-in-production.sh $BLOG_SERVER:$BLOG_HOME
 

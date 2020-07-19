@@ -11,5 +11,8 @@ defaultEntryPoints = ["http", "https"]
 
 [acme]
 [[acme.domains]]
-  main = "myblogdomain.com"
-  sans = ["monitor.myblogdomain.com", "api.myblogdomain.com", "www.myblogdomain.com"]
+  main = "perspectiveswithjosh.com"
+  sans = ["monitor.perspectiveswithjosh.com", "api.perspectiveswithjosh.com", "apiv2.perspectiveswithjosh.com", "www.perspectiveswithjosh.com"]
+[[acme.domains]]
+  main = "joshoncode.com"
+  sans = ["monitor.joshoncode.com", "api.joshoncode.com", "apiv2.joshoncode.com", "www.joshoncode.com"]

@@ -3,7 +3,7 @@
     <ul>
       <Links linkKey="footer" />
     </ul>
-    <div class="copyright">All Content Copyright (&copy;) Me, 2020</div>
+    <div class="copyright">All Content Copyright (&copy;) Joshua Jung, 2020</div>
   </div>
 </template>
 

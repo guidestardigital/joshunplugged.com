@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="hero-image" v-if="hero_image">
+    <div class="hero-image">
       <ImageSingle target="hero_image" />
     </div>
     <div class="horizontal-section-wrapper">
@@ -52,7 +52,7 @@ export default {
   },
   head () {
     return {
-      title:'Perspectives with Josh',
+      title:'Josh Unplugged',
       meta: [
         { hid: 'description', name: 'description', content: 'Life, Paranormal, Politics, and Theology. All in one place.' }
       ]

@@ -1,8 +1,8 @@
 {
-  "name": "perspectives-with-josh-backend",
+  "name": "joshunplugged-backend",
   "private": true,
   "version": "0.1.0",
-  "description": "My personal blog",
+  "description": "Josh Unplugged Blog",
   "scripts": {
     "develop": "strapi develop",
     "build": "strapi build",

@@ -7,7 +7,7 @@ networks:
 
 services:
   backend:
-    container_name: perspectiveswithjosh-backend
+    container_name: joshunplugged-backend
     image: "${DOCKER_EXTERNAL_REPO}/${DOCKER_BACKEND_IMAGE}:${DOCKER_IMAGE_VERSION}"
     ports:
       - "${BACKEND_EXTERNAL_PORT}:1337"
@@ -32,7 +32,7 @@ services:
       - traefik.enable=true
 
   frontend:
-    container_name: perspectiveswithjosh-frontend
+    container_name: joshunplugged-frontend
     image: "${DOCKER_EXTERNAL_REPO}/${DOCKER_FRONTEND_IMAGE}:${DOCKER_IMAGE_VERSION}"
     networks:
       - traefik-proxy-net
@@ -48,7 +48,7 @@ services:
       - traefik.enable=true
 
   blog_postgres:
-    container_name: perspectiveswithjosh-postgres
+    container_name: joshunplugged-postgres
     image: postgres:latest
     restart: always
     ports:

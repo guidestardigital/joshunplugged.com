@@ -1,13 +1,13 @@
-$color_theme: #1b399e;
-$color_theme_2: #E74880;
-$color_theme_3: #FF7C63;
-$color_theme_4: #FFBA55;
-$color_theme_5: #F9F871;
+$color_theme: #1b262c;
+$color_theme_2: #0f4c75;
+$color_theme_3: #0f4c75;
+$color_theme_4: #3282b8;
+$color_theme_5: #3282b8;
 $color_white: #fefefe;
 $color_white_transparent: rgba(240,240,240, 0.85);
-$color_grey_superlight: #efefef;
-$color_grey: #ccc;
-$color_grey_light: #eee;
+$color_grey_superlight: #eeeeee;
+$color_grey: #bbb;
+$color_grey_light: #ddd;
 $color_grey_dark: #666;
 $color_black: #222;
 
@@ -101,16 +101,27 @@ h3  {
 }
 .uk-navbar .uk-navbar-nav > li a {
   white-space: nowrap;
+  min-height: 100px;
 }
 
 .uk-navbar .uk-navbar-nav > li.logo a {
   font-size: 32px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.0em;
   text-transform: none;
+  border-right: 2px solid $color_grey_superlight;
 
   @media screen and (max-width: 768px) {
     font-size: 20px;
     letter-spacing: 0.0em;
+  }
+}
+
+.uk-navbar .uk-navbar-nav > li.theme a {
+  font-size: 14px;
+  text-transform: none;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
   }
 }
 
@@ -261,8 +272,6 @@ h3  {
   color: $color_black;
   padding: 0.5rem;
   background: $color_white;
-  -webkit-box-shadow: 0px 0px 12px 1px rgba(0,0,0,0.3); 
-  box-shadow: 0px 0px 12px 1px rgba(0,0,0,0.3);
 
   &.unselected {
     background-color: $color_white_transparent;
@@ -403,10 +412,6 @@ h3  {
   border-bottom: 3px solid $color_theme;
   background: #efefef !important;
   font-family: Staatliches;
-
-  box-shadow: -1px 6px 41px -18px rgba(0,0,0,0.75);
-  -webkit-box-shadow: -1px 6px 41px -18px rgba(0,0,0,0.75);
-  -moz-box-shadow: -1px 6px 41px -18px rgba(0,0,0,0.75);
 }
 
 blockquote {
@@ -573,11 +578,12 @@ table {
   border-top: 3px solid $color_theme;
 
   background-color: $color_theme_3;
-  min-height: 200px;
+  min-height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  color: $color_white;
 
   ul {
     max-width: 720px;

@@ -154,7 +154,7 @@
           { hid: 'og:title', name: 'og:title', content: title },
           { hid: 'og:image', name: 'og:image', content: this.blogPost.image_header ? this.imageBaseUri + this.blogPost.image_header.url : '' },
           { hid: 'og:description', name: 'og:description', content: this.blogPost.description },
-          { hid: 'og:url', name: 'og:url', content: window.location.href },
+          { hid: 'og:url', name: 'og:url', content: typeof window !== 'undefined' ? window.location.href : '' },
         ]
       }
     }

@@ -4,7 +4,10 @@
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
           <li class="logo">
-            <a href="/">My Personal Blog</a>
+            <a href="/">Josh Unplugged</a>
+          </li>
+          <li class="theme">
+            <a href="/">Science, paranormal, politics, everything.</a>
           </li>
         </ul>
       </div>

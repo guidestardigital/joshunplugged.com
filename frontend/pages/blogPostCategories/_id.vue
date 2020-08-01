@@ -1,39 +1,49 @@
 <template>
-  <div>
-    <client-only>
-      <div class="uk-section">
-        <div class="uk-container uk-container-large">
-          <h1>{{ blogPostCategory.name }}</h1>
-
-          <BlogPosts :blogPosts="blogPostCategory.blog_posts || []" v-if="blogPostCategory.blog_posts && blogPostCategory.blog_posts.length"></BlogPosts>
-          <div v-else>
-            <h2>No posts in this category.</h2>
-          </div>
+  <Loader :loading="loading || !blogPostCategory">
+    <div class="content" v-if="blogPostCategory">
+      <div class="content-header">
+        <div class="content-title-block">
+          <div class="content-title">{{ blogPostCategory.name }}</div>
+          <div class="content-description" 
+              v-if="!!blogPostCategory.description">{{ blogPostCategory.description }}</div>
         </div>
       </div>
-    </client-only>
-  </div>
+      <div class="content-section">
+        <BlogPostsCards :blogPosts="blogPostCategory.blog_posts || []"
+                        v-if="blogPostCategory.blog_posts && blogPostCategory.blog_posts.length" />
+        <div v-else>
+          <h2>No posts in this category.</h2>
+        </div>
+      </div>
+    </div>
+  </Loader>
 </template>
 
 <script>
   import blogPostQuery from "~/apollo/queries/blogPost/blogPosts-blogPostCategories.gql";
-  import BlogPosts from "~/components/BlogPosts";
+  import BlogPostsCards from "~/components/BlogPostsCards";
+  import Loader from "~/components/Loader";
 
   export default {
     data() {
       return {
-        blogPostCategory: {}
+        blogPostCategory: undefined,
+        loading: 0
       };
     },
     components: {
-      BlogPosts
+      BlogPostsCards,
+      Loader
     },
     apollo: {
       blogPostCategory: {
-        prefetch: true,
+        prefetch: false,
+        loadingKey: 'loading',
         query: blogPostQuery,
         variables() {
-          return { id: parseInt(this.$route.params.id) };
+          return { 
+            id: parseInt(this.$route.params.id) 
+          };
         }
       }
     }

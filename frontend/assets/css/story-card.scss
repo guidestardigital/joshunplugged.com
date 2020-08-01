@@ -1,0 +1,82 @@
+@import './variables.scss';
+
+.story-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: $size-5 0;
+
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: $size-7;
+    margin-top: $size-4;
+    flex-basis: 150px;
+    flex: 0 0 200px;
+    max-height: 133px;
+    position: relative;
+    overflow: hidden;
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+      flex-basis: 105px;
+      margin-right: $size-5;
+    }
+
+    .image {
+      object-fit: cover;
+    }
+  }
+
+  .text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+
+    .story-title {
+      font-size: 22px;
+      
+      font-family: Staatliches;
+
+      @media only screen and (max-width: $breakpoint-mobile) {
+        font-size: 18px;
+      }
+    }
+
+    .date-count-block {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      margin: $size-4 0;
+
+      a {
+        font-size: 12px;
+      }
+
+      @media only screen and (max-width: $breakpoint-mobile) {
+        flex-direction: column;
+      }
+    }
+
+    .count {
+      font-family: Staatliches;
+      font-style: italic;
+      font-size: 12px;
+    }
+
+    .date {
+      font-size: 12px;
+    }
+
+    .description {
+      font-size: 12px;
+      text-decoration: none;
+      border-top: 1px solid $color_grey_superlight;
+      padding-top: $size-4;
+
+      @media only screen and (max-width: $breakpoint-mobile) {
+        font-size: 11px;
+      }
+    }
+  }
+}

@@ -1,48 +1,59 @@
 <template>
-  <div>
-    <div v-if="blogSery.image_header || blogSery.background_color"
-         id="blog-series-banner"
-         class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding"
-         :style="{ 'background-color': blogSery.background_color }"
-         :data-src="blogSery.image_header ? imageBaseUri + blogSery.image_header.url : undefined"
-         uk-img>
-      <div class="text-float title-and-description">
-        <h1>{{ blogSery.title }}</h1>
-        <h2>{{ publishedAtFormatted }}</h2>
-        <div class="description" v-html="$md.render(blogSery.description)"/>
+  <Loader :loading="loading || !blogSery">
+    <div class="blog-series" v-if="!!blogSery">
+      <div v-if="blogSery.image_header || blogSery.background_color"
+          class="hero blog-series-hero"
+          :style="{ 'background-color': blogSery.background_color }"
+          :data-src="blogSery.image_header ? imageBaseUri + blogSery.image_header.url : undefined"
+          uk-img>
       </div>
-    </div>
-    <div class="uk-section">
-      <div class="uk-container uk-container-large">
-        <BlogPosts :blogPosts="blogPostsSorted" v-if="blogSery.blog_posts && blogSery.blog_posts.length"></BlogPosts>
-        <div v-else>
-          <h2>No public posts in this series yet.</h2>
+      <div class="content">
+        <div class="content-header">
+          <div class="content-title-block">
+            <div class="content-title">{{ blogSery.title }}</div>
+            <div class="content-date">{{ publishedAtFormatted }}</div>
+            <div class="content-description"
+                v-if="!!blogSery.description"
+                v-html="$md.render(blogSery.description)"/>
+          </div>
+        </div>
+        <div class="content-section">
+          <BlogPostsCards :blogPosts="blogPosts"
+                          sortKey="blog_series_order"
+                          :showSeriesLink="false"
+                          v-if="blogSery.blog_posts && blogSery.blog_posts.length" />
+          <div v-else>
+            <h2>No public posts in this series yet.</h2>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Loader>
 </template>
 
 <script>
   import blogSeriesQuery from "~/apollo/queries/blogSeries/blogSeries.gql";
-  import BlogPosts from "~/components/BlogPosts";
-
+  import BlogPostsCards from "~/components/BlogPostsCards";
+  import moment from 'moment';
+  import Loader from "~/components/Loader";
   export default {
     data() {
       return {
-        blogSery: {},
-        imageBaseUri: process.env.IMAGE_BASE_URI || ''
+        blogSery: undefined,
+        imageBaseUri: process.env.IMAGE_BASE_URI || '',
+        loading: 0
       };
     },
     components: {
-      BlogPosts
+      BlogPostsCards,
+      Loader
     },
     computed: {
-      blogPostsSorted() {
-        if (!this.blogSery) return [];
-        if (this.cachedBlogPostsSorted) return this.cachedBlogPostsSorted;
+      blogPosts() {
+        if (!this.blogSery) return undefined;
+        if (!this.blogSery.blog_posts) return [];
 
-        return this.cachedBlogPostsSorted = (this.blogSery.blog_posts ? this.blogSery.blog_posts.sort((a, b) => a.blog_series_order > b.blog_series_order ? -1 : 1) : []);
+        return this.blogSery.blog_posts;
       },
       publishedAtFormatted() {
         if (!this.blogSery.published_at) {
@@ -54,7 +65,8 @@
     },
     apollo: {
       blogSery: {
-        prefetch: true,
+        prefetch: false,
+        loadingKey: "loading",
         query: blogSeriesQuery,
         variables() {
           return { id: parseInt(this.$route.params.id) };

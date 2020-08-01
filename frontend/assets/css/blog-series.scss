@@ -1,0 +1,45 @@
+@import './variables.scss';
+
+.blog-series {
+  .blog-series-header {
+    min-height: 47vh;
+    position: relative;
+    padding-bottom: $size-9;
+    background-position: 50% 50%;
+    background-size: cover;
+    border-bottom: 2px solid $color_grey_superlight;
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+      padding-bottom: $size-5;
+      padding-top: $size-6;
+    }
+  }
+
+  .blog-series-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .blog-series-title-container {
+      margin: $size-6;
+      max-width: $breakpoint-mobile;
+      text-align: center;
+      border-bottom: 1px solid $color_grey_superlight;
+
+      .blog-series-title {
+        font-size: 34px;
+        margin: $size-5;
+        font-family: Staatliches;
+      }
+
+      .blog-series-date {
+        font-size: 12px;
+      }
+
+      .blog-series-description {
+        font-size: 14px;
+        margin: $size-5;
+      }
+    }
+  }
+}

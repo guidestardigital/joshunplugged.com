@@ -10,8 +10,16 @@ query BlogPosts($id: ID!) {
     background_color
     foreground_color
     show_description
+    blog_series_order
     image_header {
       url
+    }
+    blog_series {
+      id
+      title
+      blog_posts {
+        id
+      }
     }
     links {
       id

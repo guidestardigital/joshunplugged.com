@@ -4,13 +4,22 @@ query Category($id: ID!){
     blog_posts {
       id
       title
+      published_at
       background_color
       foreground_color
       description
+      blog_series_order
       use_default_post_background
       show_description
       image_header {
         url
+      }
+      blog_series {
+        id
+        title
+        blog_posts {
+          id
+        }
       }
     }
   }

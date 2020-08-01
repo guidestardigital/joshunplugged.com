@@ -20,6 +20,7 @@ query BlogPostSeries {
       title
       public
       use_default_post_background
+      blog_series_order
       show_description
       show_in_series_only
       blog_series_order

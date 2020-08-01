@@ -1,0 +1,31 @@
+@import './variables.scss';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    font-size: 34px;
+    margin: $size-5;
+    font-family: Staatliches;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .categories {
+    display: flex;
+    flex-direction: row;
+
+    a {
+      margin: $size-5;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+  }
+}

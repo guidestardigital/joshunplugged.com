@@ -20,6 +20,7 @@ query BlogPostSeries($id: ID!) {
       title
       show_description
       description
+      published_at
       background_color
       foreground_color
       use_default_post_background
@@ -28,6 +29,13 @@ query BlogPostSeries($id: ID!) {
         url
       }
       show_in_series_only
+      blog_series {
+        id
+        title
+        blog_posts {
+          id
+        }
+      }
     }
   }
 }

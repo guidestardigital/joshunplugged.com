@@ -1,0 +1,66 @@
+.hero {
+  min-height: 47vh;
+  position: relative;
+  padding-bottom: $size-9;
+  background-position: 50% 50%;
+  background-size: cover;
+
+  @media only screen and (max-width: $breakpoint-mobile) {
+    padding-bottom: $size-5;
+    padding-top: $size-6;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .content-header {
+    display: flex;
+    flex-direction: row;
+    max-width: $breakpoint-mobile;
+    border-bottom: 1px solid $color_grey_superlight;
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+      flex-direction: column;
+    }
+
+    .content-title-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: $size-5;
+      text-align: center;
+  
+      .content-title {
+        font-size: 34px;
+        margin: $size-5;
+        font-family: Staatliches;
+      }
+  
+      .content-date {
+        font-size: 12px;
+      }
+  
+      .content-description {
+        font-size: 14px;
+        margin: $size-5;
+      }
+    }
+  }
+
+  .content-section {
+    max-width: $breakpoint-mobile;
+    margin: $size-8;
+
+    .section-title {
+      font-size: 32px;
+      font-family: Staatliches;
+    }
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+      margin: $size-6;
+    }
+  }
+}

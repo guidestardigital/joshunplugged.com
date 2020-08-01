@@ -7,10 +7,10 @@ read_var() {
     echo ${VAR[1]}
 }
 
-BLOG_IP=$(read_var BLOG_IP .env)
-POSTGRES_EXTERNAL_PORT=$(read_var POSTGRES_EXTERNAL_PORT .env)
-POSTGRES_USER=$(read_var POSTGRES_USER .env)
-POSTGRES_DB=$(read_var POSTGRES_DB .env)
+BLOG_IP=$(read_var BLOG_IP .env.prod)
+POSTGRES_EXTERNAL_PORT=$(read_var POSTGRES_EXTERNAL_PORT .env.prod)
+POSTGRES_USER=$(read_var POSTGRES_USER .env.prod)
+POSTGRES_DB=$(read_var POSTGRES_DB .env.prod)
 
 echo "--------------------------------------------------"
 echo " Fetching production database to local..."

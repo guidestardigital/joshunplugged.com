@@ -7,7 +7,7 @@
 
   .blog-series-information {
     max-width: 400px;
-    min-width: 250px;
+    min-width: 300px;
     margin: $size-5;
     border-right: 1px solid $color_grey_superlight;
 
@@ -35,6 +35,10 @@
 
     a {
       font-size: 11px;
+
+      &.selected {
+        font-weight: bold;
+      }
     }
 
     @media screen and (max-width: $breakpoint-mobile) {
@@ -62,9 +66,23 @@
 
     h1, h2, h3, h4, h5, h6 {
       font-family: Staatliches;
+    }
+
+    h1 {
+      font-size: 30px;
       border-bottom: 1px solid $color_grey_superlight;
       margin-bottom: $size-5;
       padding-bottom: $size-5;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: $size-4;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: $size-3;
     }
 
     p {
@@ -72,13 +90,33 @@
     }
 
     blockquote {
-      margin: $size-5;
+      margin: $size-7 $size-5;
       letter-spacing: 0.06rem;
       padding: 0;
-      padding-left: $size-5;
+      padding-left: $size-3;
       background: transparent;
-      border-left: 2px solid $color_theme;
+      border-left: 1px solid $color_grey;
       color: $color_grey_dark;
+    }
+  }
+
+  .blog-post-series-next-prev {
+    margin: $size-5;
+    padding: $size-5;
+    border-top: 2px solid $color_grey_superlight;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - #{$size-5 * 2});
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      flex-direction: column;
+      flex-flow: column-reverse;
+
+      > div:last-child {
+        margin-bottom: $size-5;
+      }
     }
   }
 }

@@ -52,7 +52,7 @@
 
   .content-section {
     max-width: $breakpoint-mobile;
-    margin: $size-8;
+    margin-top: $size-8;
 
     .section-title {
       font-size: 32px;
@@ -62,5 +62,9 @@
     @media only screen and (max-width: $breakpoint-mobile) {
       margin: $size-6;
     }
+  }
+
+  .content-section:last-child {
+    margin-bottom: $size-8;
   }
 }

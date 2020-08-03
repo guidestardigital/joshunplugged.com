@@ -1,5 +1,6 @@
 <template>
-  <div class="header">
+  <div class="header" 
+       id="page-header">
     <div class="logo">
       <a href="/">Josh Unplugged</a>
     </div>

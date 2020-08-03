@@ -1,8 +1,9 @@
 <template>
-  <div>
-    <Header></Header>
-    <div class="body">
-    <nuxt />
+  <div class="footer-backdrop">
+    <Header />
+    <div class="body" 
+         :style="{ 'margin-top': bodyMarginTop + 'px' }">
+      <nuxt />
     </div>
     <Footer />
   </div>
@@ -16,8 +17,25 @@
   export default {
     data() {
       return {
-        postCategories: []
+        postCategories: [],
+        bodyMarginTop: 1
       };
+    },
+    methods: {
+      onResize(event) {
+        this.$nextTick(() => {
+          const header = document.getElementById('page-header');
+          this.bodyMarginTop = header.offsetHeight;
+          this.$forceUpdate();
+        })
+      }
+    },
+    mounted() {
+      window.addEventListener('resize', this.onResize);
+      this.onResize();
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.onResize)
     },
     components: {
       Header,

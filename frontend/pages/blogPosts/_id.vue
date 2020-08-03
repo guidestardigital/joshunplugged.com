@@ -17,9 +17,9 @@
           <div class="blog-series-navigation"
                v-if="!!thisBlogSeries">
             <div v-for="bp in thisBlogSeriesBlogPosts"
-                 :key="bp.id"
-                 :class="{'selected': bp.id == blogPost.id, 'unselected': bp.id != blogPost.id}">
-              <router-link class="uk-link" :to="{ name: 'blogPosts-id', params: {id: bp.id} }">
+                 :key="bp.id">
+              <router-link :class="{ 'uk-link': true, 'selected': bp.id == blogPost.id}" 
+                           :to="{ name: 'blogPosts-id', params: {id: bp.id} }">
                 {{ bp.title }}
               </router-link>
             </div>
@@ -41,18 +41,22 @@
       </div>
 
       <div class="content-section">
-        <div class="uk-container uk-container-medium blog-post-series-next-prev border-top"
+        <div class="blog-post-series-next-prev"
              v-if="!!thisBlogSeries">
-          <router-link class="uk-link previous-post"
-                        v-if="prevPostInSeries"
+          <div class="vertical-description-link" v-if="prevPostInSeries">
+            <div class="description">Previous</div>
+            <router-link class="uk-link"
                         :to="{ name: 'blogPosts-id', params: {id: prevPostInSeries.id} }">
-            Previous Post: {{ prevPostInSeries.title }}
-          </router-link>
-          <router-link class="uk-link next-post"
-                        v-if="nextPostInSeries"
-                        :to="{ name: 'blogPosts-id', params: {id: nextPostInSeries.id} }">
-            Next Post: {{ nextPostInSeries.title }}
-          </router-link>
+              {{ prevPostInSeries.title }}
+            </router-link>
+          </div>
+          <div class="vertical-description-link" v-if="nextPostInSeries">
+            <div class="description">Next</div>
+            <router-link class="uk-link"
+                          :to="{ name: 'blogPosts-id', params: {id: nextPostInSeries.id} }">
+              {{ nextPostInSeries.title }}
+            </router-link>
+          </div>
         </div>
         <div class="uk-container uk-container-medium blog-post-footer" v-if="blogPost.links && blogPost.links.length">
           <h3>My Recommended Links</h3>

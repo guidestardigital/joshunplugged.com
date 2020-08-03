@@ -3,5 +3,8 @@ query BlogPostCategories {
     id
     name
     description
+    blog_posts {
+      id
+    }
   }
 }

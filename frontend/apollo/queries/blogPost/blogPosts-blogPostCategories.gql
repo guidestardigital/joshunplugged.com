@@ -1,6 +1,8 @@
 query Category($id: ID!){
   blogPostCategory(id: $id) {
+    id
     name
+    description
     blog_posts {
       id
       title

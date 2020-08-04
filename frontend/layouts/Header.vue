@@ -39,8 +39,9 @@
     },
     methods: {
       logout() {
-        this.$auth.logout();
-        window.location.reload();
+        this.$auth.logout().then(() => {
+          window.location.reload();
+        });
       }
     },
     apollo: {

@@ -5,6 +5,7 @@ RUN npm i -g strapi
 WORKDIR $DIRPATH/$DIRNAME
 
 COPY . .
+COPY ../.env.prod ./.env
 
 RUN yarn install
 RUN chmod +x /wait-for-it.sh

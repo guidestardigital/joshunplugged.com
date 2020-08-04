@@ -1,20 +1,44 @@
 <template>
-  <div>
-    Email
-    <input id="email" />
-    Username
-    <input id="username" />
-    Password
-    <input id="password" type="password" />
-    <button v-on:click="signup">Signup</button>
+  <div class="registration-page">
+    <div v-if="sending">
+      Sending registration...
+    </div>
+    <div v-else-if="success">
+      You have been registered as <div class="username">{{user.username}}</div>.
+      Please check your email at <div class="email">{{user.email}}</div> to confirm your registration.
+    </div>
+    <div v-else>
+      Email
+      <input id="email" />
+      Username
+      <input id="username" />
+      First Name
+      <input id="firstName" placeholder="Optional" />
+      Last Name
+      <input id="lastName" placeholder="Optional" />
+      Password
+      <input id="password" type="password" />
+      <button v-on:click="signup">Signup</button>
+      <div v-if="error">
+        {{ error }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 
 export default {
+  data() {
+    return {
+      sending: false, 
+      success: false,
+      error: undefined
+    };
+  },
   methods: {
     signup() {
+      this.sending = true;
 
       fetch('http://localhost:1337/auth/local/register', {
         method: 'POST',
@@ -30,8 +54,28 @@ export default {
           username: document.getElementById('username').value,
           email: document.getElementById('email').value,
           password: document.getElementById('password').value,
+          firstName: document.getElementById('firstName').value,
+          lastName: document.getElementById('lastName').value,
         })
       })
+      .then(response => {
+        this.sending = false;
+        return response.json();
+      })
+      .then(response => {
+        if (!response) return;
+        
+        if (response.message) {
+          let message = "An error occurred registering. Please try again later.";
+          
+          message = response.message.map(m => m.messages.map(m2 => m2.message).join('\n')).join('\n');
+
+          this.error = message;
+        } else {
+          this.success = true;
+          this.user = response.user;
+        }
+      });
     }
   }
 }

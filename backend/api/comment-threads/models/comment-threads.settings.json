@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comment_threads",
+  "info": {
+    "name": "Comment Threads"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "topic": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "datetime"
+    },
+    "blog_post": {
+      "via": "comment_threads",
+      "model": "blog-post"
+    }
+  }
+}

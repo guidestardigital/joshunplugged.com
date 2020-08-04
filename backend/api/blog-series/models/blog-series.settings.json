@@ -38,9 +38,9 @@
       "type": "datetime"
     },
     "authors": {
+      "via": "blog_series",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "blog_series",
       "dominant": true
     },
     "background_color": {

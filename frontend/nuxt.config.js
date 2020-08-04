@@ -71,20 +71,45 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     '@nuxtjs/apollo',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    '@nuxtjs/auth',
+    '@nuxtjs/proxy'
   ],
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/auth/local',
+            method: 'post',
+            propertyName: 'jwt'
+          },
+          logout: { 
+            url: '/auth/logout', 
+            method: 'post' 
+          },
+          user: {
+            url: '/users/me', 
+            method: 'get', 
+            propertyName: false
+          }
+        },
+        tokenName: 'Authorization',
+        tokenType: 'Bearer'
+      }
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: '/api',
+    credentials: true
   },
   apollo: {  
     clientConfigs: {
@@ -131,5 +156,13 @@ module.exports = {
     // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
     // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
     quotes: '“”‘’',
+  },
+  proxy: {
+    '/api': {
+      target: process.env.BLOG_API_BASE,
+      pathRewrite: {
+        '^/api' : '/'
+      }
+    }
   }
 }

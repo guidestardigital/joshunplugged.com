@@ -71,6 +71,10 @@
     },
     "use_default_post_background": {
       "type": "boolean"
+    },
+    "comment_threads": {
+      "collection": "comment-threads",
+      "via": "blog_post"
     }
   }
 }

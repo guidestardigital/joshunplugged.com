@@ -65,8 +65,14 @@
       "model": "blog-post"
     },
     "blog_series": {
-      "via": "authors",
-      "collection": "blog-series"
+      "collection": "blog-series",
+      "via": "authors"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
     }
   }
 }

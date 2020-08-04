@@ -10,6 +10,9 @@
                    :to="{ name: 'blogPostCategories-id', params: { id: blogPostCategory.id }}"
                    tag="a">{{ blogPostCategory.name }}</router-link>
     </div>
+    <div class="auth" v-if="user">
+      {{user.username}}
+    </div>
   </div>
 </template>
 
@@ -20,6 +23,11 @@
   export default {
     components: {
       Links
+    },
+    computed: {
+      user() {
+        return this.$auth.user;
+      }
     },
     apollo: {
       blogPostCategories: {

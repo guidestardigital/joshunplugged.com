@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/comment-threads",
+      "handler": "comment-threads.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/comment-threads/count",
+      "handler": "comment-threads.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/comment-threads/:id",
+      "handler": "comment-threads.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/comment-threads",
+      "handler": "comment-threads.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/comment-threads/:id",
+      "handler": "comment-threads.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/comment-threads/:id",
+      "handler": "comment-threads.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,19 +1,31 @@
 <template>
-  <div class="login-page">
-    <div v-if="sending">
-        Logging in...
+  <div class="login-page content">
+    <div class="content-header">
+      <div class="content-title-block">
+        <div class="content-title">Login</div>
+      </div>
     </div>
-    <div v-else>
-      <form @submit="login">
-        Email or Username
-        <input v-model="loginForm.identifier" />
-        Password
-        <input v-model="loginForm.password" type="password" />
-        <button type="submit">Login</button>
-        <div v-if="error">
-          {{ error }}
-        </div>
-      </form>
+    <div class="content-section">
+      <div v-if="sending">
+          Logging in...
+      </div>
+      <div v-else>
+        <form @submit="login" class="form">
+          <div class="form-confirmation" 
+               v-if="confirmation">
+            Your email has been successfully confirmed. Login below.
+          </div>
+          Email or Username
+          <input v-model="loginForm.identifier" autofocus/>
+          Password
+          <input v-model="loginForm.password" type="password" />
+          <button type="submit">Login</button>
+          <div v-if="error" class="form-error">
+            {{ error }}
+          </div>
+        </form>
+        <a href="/register">Register as New User</a>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +37,7 @@ export default {
     return {
       sending: false, 
       error: undefined,
+      confirmation: this.$route.query.confirmation,
       loginForm: {
         identifier: '',
         password: ''
@@ -32,30 +45,26 @@ export default {
     };
   },
   methods: {
-    async login() {
+    login() {
       this.sending = true;
 
-      try {
-        const response = await this.$auth.loginWith('local', { data: this.loginForm });
-
-        this.sending = false;
-
-        this.$auth.setUser(response.user);
-
-        window.location.href = '/';
-      } catch (error) {
-        this.sending = false;
-
-        if (error.message) {
+      this.$auth.loginWith('local', { data: this.loginForm })
+        .then(response => {
+          this.sending = false;
+          this.$auth.setUser(response.user);
+          window.location.href = '/';
+        })
+        .catch(error => {
+          this.sending = false;
+          
           let message = "An error occurred registering. Please try again later.";
           
-          message = response.message.map(m => m.messages.map(m2 => m2.message).join('\n')).join('\n');
+          if (error.response.data.message) {
+            message = error.response.data.message.map(m => m.messages.map(m2 => m2.message).join('\n')).join('\n');
+          }
 
           this.error = message;
-        } else {
-          this.error = "An error occurred registering. Please try again later.";
-        }
-      }
+        })
     }
   }
 }

@@ -4,14 +4,22 @@
     <div class="logo">
       <a href="/">Josh Unplugged</a>
     </div>
-    <div class="categories">
-      <router-link v-for="blogPostCategory in blogPostCategories" 
-                   v-bind:key="blogPostCategory.id" 
-                   :to="{ name: 'blogPostCategories-id', params: { id: blogPostCategory.id }}"
-                   tag="a">{{ blogPostCategory.name }}</router-link>
-    </div>
-    <div class="auth" v-if="user">
-      {{user.username}}
+    <div class="controls">
+      <div class="categories">
+        <router-link v-for="blogPostCategory in blogPostCategories" 
+                    v-bind:key="blogPostCategory.id" 
+                    :to="{ name: 'blogPostCategories-id', params: { id: blogPostCategory.id }}"
+                    tag="a">{{ blogPostCategory.name }}</router-link>
+      </div>
+      <div class="auth">
+        <div class="username" v-if="user">
+          Welcome, {{user.username}}
+        </div>
+        <a v-on:click="logout()"
+           v-if="user">Logout</a>
+        <a href="/login"
+           v-else>Login</a>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +35,12 @@
     computed: {
       user() {
         return this.$auth.user;
+      }
+    },
+    methods: {
+      logout() {
+        this.$auth.logout();
+        window.location.reload();
       }
     },
     apollo: {

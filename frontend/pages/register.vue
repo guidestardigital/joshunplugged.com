@@ -1,27 +1,36 @@
 <template>
-  <div class="registration-page">
-    <div v-if="sending">
-      Sending registration...
-    </div>
-    <div v-else-if="success">
-      You have been registered as <div class="username">{{user.username}}</div>.
-      Please check your email at <div class="email">{{user.email}}</div> to confirm your registration.
-    </div>
-    <div v-else>
-      Email
-      <input id="email" />
-      Username
-      <input id="username" />
-      First Name
-      <input id="firstName" placeholder="Optional" />
-      Last Name
-      <input id="lastName" placeholder="Optional" />
-      Password
-      <input id="password" type="password" />
-      <button v-on:click="signup">Signup</button>
-      <div v-if="error">
-        {{ error }}
+  <div class="registration-page content">
+    <div class="content-header">
+      <div class="content-title-block">
+        <div class="content-title">Register</div>
+        <div class="content-description">Become a user to comment on posts, receieve emails on comment replies, and receive updates when new content is added.</div>
       </div>
+    </div>
+    <div class="content-section">
+      <form v-on:submit.prevent="register" 
+            class="form">
+        <div v-if="sending">
+          Sending registration...
+        </div>
+        <div v-else-if="success" class="form-confirmation">
+          You have been registered as <span class="username">{{user.username}}</span>.
+          Please check your email at <span class="email">{{user.email}}</span> to confirm your registration.
+        </div>
+        Email
+        <input id="email" />
+        Username
+        <input id="username" />
+        First Name
+        <input id="firstName" placeholder="Optional" />
+        Last Name
+        <input id="lastName" placeholder="Optional" />
+        Password
+        <input id="password" type="password" />
+        <button type="submit">Signup</button>
+        <div v-if="error" class="form-error">
+          {{ error }}
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -37,8 +46,10 @@ export default {
     };
   },
   methods: {
-    signup() {
+    register() {
       this.sending = true;
+      this.error = undefined;
+      this.success = false;
 
       fetch('http://localhost:1337/auth/local/register', {
         method: 'POST',

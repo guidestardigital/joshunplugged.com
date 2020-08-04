@@ -88,10 +88,6 @@ module.exports = {
             method: 'post',
             propertyName: 'jwt'
           },
-          logout: { 
-            url: '/auth/logout', 
-            method: 'post' 
-          },
           user: {
             url: '/users/me', 
             method: 'get', 

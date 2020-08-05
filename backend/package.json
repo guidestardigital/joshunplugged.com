@@ -11,7 +11,7 @@
     "debug": "node --inspect=0.0.0.0:9229 ./node_modules/strapi/bin/strapi.js develop",
     "dev:docker": "node --inspect=0.0.0.0 server",
     "start": "strapi start",
-    "start:docker:prod": "strapi build:prod && strapi start"
+    "start:docker:prod": "npm run build:prod && strapi start"
   },
   "devDependencies": {},
   "dependencies": {

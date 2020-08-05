@@ -39,7 +39,7 @@
     },
     methods: {
       logout() {
-        this.$auth.logout().then(() => {
+        this.$auth.logout().then(response => {
           window.location.reload();
         });
       }

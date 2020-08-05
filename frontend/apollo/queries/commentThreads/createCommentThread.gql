@@ -1,0 +1,9 @@
+mutation CreateCommentThread($commentThreadInput: CommentThreadInput!) {
+    createCommentThread(
+      input: { data: $commentThreadInput },
+    ) {
+      commentThread {
+        id
+      }
+    }
+  }

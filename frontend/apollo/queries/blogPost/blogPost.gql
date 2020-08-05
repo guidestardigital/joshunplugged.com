@@ -31,5 +31,8 @@ query BlogPosts($id: ID!) {
         url
       }
     }
+    comment_thread {
+      id
+    }
   }
 }

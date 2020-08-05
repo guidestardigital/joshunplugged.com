@@ -1,5 +1,8 @@
 <template>
-  <div class="blog-post">
+  <div class="blog-post" v-if="!blogPost">
+    Error: this blog post had an error or it does not exist.
+  </div>
+  <div class="blog-post" v-else>
     <div v-if="blogPost.image_header || blogPost.background_color"
          class="hero blog-post-hero"
          :style="blogPostBackgroundHeader" />
@@ -41,6 +44,7 @@
       </div>
 
       <div class="content-section">
+        <!-- Next and Previous -->
         <div class="blog-post-series-next-prev"
              v-if="!!thisBlogSeries">
           <div class="vertical-description-link" v-if="prevPostInSeries">
@@ -58,6 +62,13 @@
             </router-link>
           </div>
         </div>
+
+        <!-- Comment Thread -->
+        <CommentThread :threadId="blogPost.comment_thread ? blogPost.comment_thread.id : '-1'"
+                       :key="commentThreadKey"
+                       @replyCreated="commentThread_replyCreated" />
+
+        <!-- Recommended Links -->
         <div class="uk-container uk-container-medium blog-post-footer" v-if="blogPost.links && blogPost.links.length">
           <h3>My Recommended Links</h3>
           <div class="related-links">
@@ -71,26 +82,85 @@
 
 <script>
   import blogPostQuery from "~/apollo/queries/blogPost/blogPost";
+  import createComment from "~/apollo/queries/comments/createComment";
+  import createCommentThread from "~/apollo/queries/commentThreads/createCommentThread";
+  import updateCommentThread from "~/apollo/queries/commentThreads/updateCommentThread";
+  
   import Link from "~/components/Link";
   import blogSeriessQuery from '~/apollo/queries/blogSeries/blogSeriess'
-  import Prism from 'prismjs';
+  import CommentThread from '~/components/CommentThread';
 
-  var moment = require("moment");
+  const moment = require("moment");
 
   export default {
     data() {
       return {
+        threadId: undefined,
         blogPost: {},
         blogSeries: [],
         moment: moment,
-        imageBaseUri: process.env.IMAGE_BASE_URI || ''
+        imageBaseUri: process.env.IMAGE_BASE_URI || '',
+        commentThreadKey: 0
       };
     },
     components: {
-      Link
+      Link,
+      CommentThread
     },
-    updated: function() {
-      Prism.highlightAll();
+    computed: {
+      threadId() {
+        if (this.threadId) return this.threadId;
+
+        return this.blogPost.comment_thread.id;
+      }
+    },
+    methods: {
+      commentThread_replyCreated(reply) {
+        console.log('New Reply created', reply);
+
+        this.$apollo.mutate({
+            mutation: createComment,
+            variables: {
+              commentInput: {
+                user: this.$auth.user.id,
+                text: reply.replyText
+              }
+            }
+          }).then(response => {
+            console.log('comment created', response)
+
+            if (!reply.commentThread) {
+              this.$apollo.mutate({
+                mutation: createCommentThread,
+                variables: {
+                  commentThreadInput: {
+                    blog_post: this.blogPost.id,
+                    comments: [response.data.createComment.comment.id]
+                  }
+                }
+              }).then(response => {
+                this.blogPost.comment_thread = response.data.createCommentThread.commentThread;
+                this.commentThreadKey++;
+              })
+            } else {
+              this.$apollo.mutate({
+                mutation: updateCommentThread,
+                variables: {
+                  threadId: reply.commentThread.id,
+                  commentThreadInput: {
+                    comments: [
+                      ...reply.commentThread.comments.map(c => c.id),
+                      response.data.createComment.comment.id
+                    ]
+                  }
+                }
+              }).then(response => {
+                console.log('update thread created', response);
+                this.commentThreadKey++;
+              })
+            }
+          });
+      }
     },
     computed: {
       blogPostBackgroundHeader() {
@@ -151,15 +221,17 @@
       }
     },
     head () {
-      const title = this.blogPost.title ? this.blogPost.title + ' / My Personal Blog' : 'My Personal Blog';
+      const title = this.blogPost ? (this.blogPost.title ? this.blogPost.title + ' / My Personal Blog' : 'My Personal Blog') : 'Title Error';
+      const description = this.blogPost ? (this.blogPost.description ? this.blogPost.description : 'No description available') : 'Description Error';
+      const imageHeader = this.blogPost ? (this.blogPost.image_header ? this.imageBaseUri + this.blogPost.image_header.url : '') : '';
 
       return {
         title: title,
         meta: [
-          { hid: 'description', name: 'description', content: this.blogPost.description },
+          { hid: 'description', name: 'description', content: description },
           { hid: 'og:title', name: 'og:title', content: title },
-          { hid: 'og:image', name: 'og:image', content: this.blogPost.image_header ? this.imageBaseUri + this.blogPost.image_header.url : '' },
-          { hid: 'og:description', name: 'og:description', content: this.blogPost.description },
+          { hid: 'og:image', name: 'og:image', content: imageHeader },
+          { hid: 'og:description', name: 'og:description', content: description },
           { hid: 'og:url', name: 'og:url', content: typeof window !== 'undefined' ? window.location.href : '' },
         ]
       }

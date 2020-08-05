@@ -33,6 +33,11 @@
     mounted() {
       window.addEventListener('resize', this.onResize);
       this.onResize();
+
+      // Setup Apollo Login JWT token, on startup
+      if (this.$auth.getToken('local')) {
+        this.$apolloHelpers.onLogin(this.$auth.getToken('local').replace('Bearer ', ''));
+      }
     },
     beforeDestroy() {
       window.removeEventListener('resize', this.onResize)

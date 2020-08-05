@@ -15,9 +15,16 @@
     "createdAt": {
       "type": "datetime"
     },
+    "comments": {
+      "via": "comment_thread",
+      "collection": "comments"
+    },
+    "type": {
+      "type": "string"
+    },
     "blog_post": {
-      "via": "comment_threads",
-      "model": "blog-post"
+      "model": "blog-post",
+      "via": "comment_thread"
     }
   }
 }

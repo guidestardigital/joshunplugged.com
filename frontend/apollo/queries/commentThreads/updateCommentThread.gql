@@ -1,0 +1,12 @@
+mutation UpdateCommentThread($commentThreadInput: editCommentThreadInput!, $threadId: ID!) {
+    updateCommentThread(
+      input: { 
+        data: $commentThreadInput,
+        where: { id: $threadId } 
+      }
+    ) {
+      commentThread {
+        id
+      }
+    }
+  }

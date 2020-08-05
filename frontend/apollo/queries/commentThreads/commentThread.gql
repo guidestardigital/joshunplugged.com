@@ -1,0 +1,26 @@
+query CommentThread($id: ID!) {  
+  commentThread(id: $id) {
+    id
+    comments {
+      id
+      text
+      hidden
+      created_at
+      hidden
+      hidden_reason
+      user {
+        id
+        username
+        firstName
+        lastName
+        blocked
+        image {
+          url
+        }
+      }
+      comment_thread {
+        id
+      }
+    }
+  }
+}

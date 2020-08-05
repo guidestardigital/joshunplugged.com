@@ -18,6 +18,13 @@
     },
     "hidden": {
       "type": "boolean"
+    },
+    "comment_thread": {
+      "model": "comment-threads",
+      "via": "comments"
+    },
+    "hidden_reason": {
+      "type": "text"
     }
   }
 }

@@ -5,7 +5,8 @@ module.exports = ({ env }) => {
   });
   console.log();
   return {
-    host: '0.0.0.0',
+    host: `0.0.0.0`,
+    url: 'https://' + env('BLOG_API_DOMAIN'),
     port: 1337,
     production: env('NODE_ENV') === 'production',
     proxy: {

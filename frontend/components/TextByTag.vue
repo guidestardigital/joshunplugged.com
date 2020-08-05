@@ -19,9 +19,6 @@
         default: ''
       }
     },
-    mounted() {
-      console.log('Text Mounted');
-    },
     apollo: {
       text: {
         prefetch: true,
@@ -31,8 +28,10 @@
           return { tag: this.tag };
         },
         result(apolloQueryResult, data) {
-          if (apolloQueryResult.data.texts && apolloQueryResult.data.texts.length) {
+          if (apolloQueryResult.data && apolloQueryResult.data.texts && apolloQueryResult.data.texts.length) {
             this.text = apolloQueryResult.data.texts[0].text;
+          } else {
+            this.text = `Error loading Text with tag ${this.tag}`;
           }
         }
       }

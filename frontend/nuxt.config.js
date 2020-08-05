@@ -5,14 +5,15 @@ require('dotenv').config({ path: envPath });
 console.log('-----------------------------------------------------------------');
 console.log(`Loading from ${envPath}:`)
 console.log(` IMAGE_BASE_URI: ${process.env.IMAGE_BASE_URI}`)
-console.log(` STRAPI_BASE_URL: ${process.env.STRAPI_BASE_URL}`)
-console.log(` NOTE: STRAPI_BASE_URL will default to http://localhost:1337 if not specified.`)
+console.log(` BLOG_API_BASE: ${process.env.BLOG_API_BASE}`)
 console.log('-----------------------------------------------------------------');
 
 module.exports = {
   mode: 'universal',
   env: {
-    IMAGE_BASE_URI: process.env.IMAGE_BASE_URI || ''
+    IMAGE_BASE_URI: process.env.IMAGE_BASE_URI || '',
+    BLOG_API_BASE: process.env.BLOG_API_BASE || 'BLOG_API_BASE',
+    BLOG_TITLE: process.env.BLOG_TITLE || 'BLOG_TITLE'
   },
   /*
   ** Headers of the page
@@ -104,14 +105,13 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: '/api',
+    baseURL: process.env.BLOG_API_BASE,
     credentials: true
   },
   apollo: {  
     clientConfigs: {
       default: {
-        // NOTE: STRAPI_BASE_URL comes from the docker build NOT from the .env file!!!
-        httpEndpoint: process.env.STRAPI_BASE_URL ? process.env.STRAPI_BASE_URL + '/graphql' : "http://localhost:1337/graphql"
+        httpEndpoint: process.env.BLOG_API_BASE ? process.env.BLOG_API_BASE + '/graphql' : "http://localhost:1337/graphql"
       }
     }
   },
@@ -152,13 +152,5 @@ module.exports = {
     // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
     // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
     quotes: '“”‘’',
-  },
-  proxy: {
-    '/api': {
-      target: process.env.BLOG_API_BASE,
-      pathRewrite: {
-        '^/api' : '/'
-      }
-    }
   }
 }

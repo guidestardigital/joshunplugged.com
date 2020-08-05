@@ -1,5 +1,7 @@
 #!/bin/bash
 
+docker system prune --all --force
+
 # Run the docker compose
 docker-compose pull
 docker-compose down

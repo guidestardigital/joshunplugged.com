@@ -18,6 +18,10 @@ module.exports = ({ env }) => {
       favicon: {
         path: 'favicon.ico',
         maxAge: 86400000
+      },
+      cors: {
+        enabled: true,
+        origin: env('CORS_ORIGIN_ALLOWED')
       }
     }
   };

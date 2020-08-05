@@ -3,6 +3,7 @@
 .comment-thread {
   margin: $size-5;
   border-top: 1px solid $color_grey_superlight;
+  min-width: 320px;
 
   .title {
     font-size: 22px;

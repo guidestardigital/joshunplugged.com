@@ -9,6 +9,7 @@ COPY .env.prod .env
 
 RUN rm yarn.lock
 RUN yarn
+RUN npm run build:prod
 
 RUN chmod +x /wait-for-it.sh
 

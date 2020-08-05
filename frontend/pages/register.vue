@@ -3,7 +3,7 @@
     <div class="content-header">
       <div class="content-title-block">
         <div class="content-title">Register</div>
-        <div class="content-description">Become a user to comment on posts, receieve emails on comment replies, and receive updates when new content is added.</div>
+        <div class="content-description">Become a user to comment on posts, receive emails on comment replies, and receive updates when new content is added.</div>
       </div>
     </div>
     <div class="content-section">
@@ -51,7 +51,7 @@ export default {
       this.error = undefined;
       this.success = false;
 
-      fetch('http://localhost:1337/auth/local/register', {
+      fetch(process.env.BLOG_API_BASE + '/auth/local/register', {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',

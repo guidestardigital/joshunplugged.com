@@ -53,7 +53,7 @@
         if (!this.blogSery) return undefined;
         if (!this.blogSery.blog_posts) return [];
 
-        return this.blogSery.blog_posts;
+        return this.blogSery.blog_posts.filter(bp => bp.public);
       },
       publishedAtFormatted() {
         if (!this.blogSery.published_at) {

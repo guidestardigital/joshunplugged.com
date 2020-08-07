@@ -7,24 +7,24 @@
          class="hero blog-post-hero"
          :style="blogPostBackgroundHeader" />
 
-    <div class="content blog-body">
+    <div class="content blog-body" id="top">
       <div class="content-header">
         <div class="blog-series-information"
             v-if="!!thisBlogSeries">
           <div class="series-intro">Part {{ blogPost.blog_series_order }} of Series</div> 
           <div class="blog-series-title">
-            <router-link class="uk-link" :to="{ name: 'blogSeries-id', params: {id: thisBlogSeries.id} }">
+            <nuxt-link class="uk-link" :to="{ name: 'blogSeries-id', params: {id: thisBlogSeries.id} }">
               {{ thisBlogSeries.title }}
-            </router-link>
+            </nuxt-link>
           </div>
           <div class="blog-series-navigation"
                v-if="!!thisBlogSeries">
             <div v-for="bp in thisBlogSeriesBlogPosts"
                  :key="bp.id">
-              <router-link :class="{ 'uk-link': true, 'selected': bp.id == blogPost.id}" 
-                           :to="{ name: 'blogPosts-id', params: {id: bp.id} }">
+              <nuxt-link :class="{ 'uk-link': true, 'selected': bp.id == blogPost.id}" 
+                           :to="{ name: 'blogPosts-id', params: {id: bp.id}, hash: '#top' }">
                 {{ bp.title }}
-              </router-link>
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -49,17 +49,17 @@
              v-if="!!thisBlogSeries">
           <div class="vertical-description-link" v-if="prevPostInSeries">
             <div class="description">Previous</div>
-            <router-link class="uk-link"
-                        :to="{ name: 'blogPosts-id', params: {id: prevPostInSeries.id} }">
+            <nuxt-link class="uk-link"
+                        :to="{ name: 'blogPosts-id', params: {id: prevPostInSeries.id}, hash: '#top' }">
               {{ prevPostInSeries.title }}
-            </router-link>
+            </nuxt-link>
           </div>
           <div class="vertical-description-link" v-if="nextPostInSeries">
             <div class="description">Next</div>
-            <router-link class="uk-link"
-                          :to="{ name: 'blogPosts-id', params: {id: nextPostInSeries.id} }">
+            <nuxt-link class="uk-link"
+                          :to="{ name: 'blogPosts-id', params: {id: nextPostInSeries.id}, hash: '#top' }">
               {{ nextPostInSeries.title }}
-            </router-link>
+            </nuxt-link>
           </div>
         </div>
 

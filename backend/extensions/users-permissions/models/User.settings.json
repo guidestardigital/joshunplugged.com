@@ -61,8 +61,8 @@
       "required": false
     },
     "blogPost": {
-      "via": "users",
-      "model": "blog-post"
+      "model": "blog-post",
+      "via": "users"
     },
     "blog_series": {
       "collection": "blog-series",
@@ -73,6 +73,9 @@
     },
     "lastName": {
       "type": "string"
+    },
+    "settings": {
+      "type": "json"
     }
   }
 }

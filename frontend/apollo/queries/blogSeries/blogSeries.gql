@@ -25,6 +25,7 @@ query BlogPostSeries($id: ID!) {
       foreground_color
       use_default_post_background
       blog_series_order
+      public
       image_header {
         url
       }

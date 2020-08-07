@@ -6,10 +6,10 @@
     </div>
     <div class="controls">
       <div class="categories">
-        <router-link v-for="blogPostCategory in blogPostCategories" 
+        <nuxt-link v-for="blogPostCategory in blogPostCategories" 
                     v-bind:key="blogPostCategory.id" 
                     :to="{ name: 'blogPostCategories-id', params: { id: blogPostCategory.id }}"
-                    tag="a">{{ blogPostCategory.name }}</router-link>
+                    tag="a">{{ blogPostCategory.name }}</nuxt-link>
       </div>
       <div class="auth">
         <div class="username" v-if="user">

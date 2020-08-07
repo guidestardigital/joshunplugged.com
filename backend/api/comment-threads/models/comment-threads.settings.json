@@ -23,8 +23,8 @@
       "type": "string"
     },
     "blog_post": {
-      "model": "blog-post",
-      "via": "comment_thread"
+      "via": "comment_thread",
+      "model": "blog-post"
     }
   }
 }

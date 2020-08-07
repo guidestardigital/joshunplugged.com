@@ -14,9 +14,9 @@
       "type": "string"
     },
     "users": {
+      "via": "blogPost",
       "plugin": "users-permissions",
-      "collection": "user",
-      "via": "blogPost"
+      "collection": "user"
     },
     "published_at": {
       "type": "datetime"
@@ -73,8 +73,11 @@
       "type": "boolean"
     },
     "comment_thread": {
-      "via": "blog_post",
-      "model": "comment-threads"
+      "model": "comment-threads",
+      "via": "blog_post"
+    },
+    "tagline": {
+      "type": "string"
     }
   }
 }

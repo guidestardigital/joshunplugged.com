@@ -52,14 +52,12 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'uikit/dist/css/uikit.min.css',
     '@assets/css/main.scss'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/uikit.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -152,5 +150,19 @@ module.exports = {
     // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
     // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
     quotes: '“”‘’',
+  },
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      if (to.hash) {
+        setTimeout(() => {
+          window.scrollTo({ 
+            top: document.querySelector(to.hash).offsetTop, 
+            behavior: 'smooth'
+          });
+        },100);
+      }
+
+      return window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }

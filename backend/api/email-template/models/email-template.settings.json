@@ -10,7 +10,7 @@
     "timestamps": true
   },
   "attributes": {
-    "name": {
+    "tag": {
       "type": "string"
     },
     "description": {
@@ -21,6 +21,9 @@
     },
     "template": {
       "type": "text"
+    },
+    "subject": {
+      "type": "string"
     }
   }
 }

@@ -9,14 +9,13 @@
           v-if="!!commentThread">
         <div class="comment"
             :key="comment.id"
-            v-for="comment in commentThread.comments">
+            v-for="comment in sortedComments">
           <div class="comment-header">
             <div class="username">{{ comment.user.username }}</div>
             <div class="created-at">{{ commentCreatedAt(comment) }}</div>
           </div>
           <div class="text"
-               v-if="!comment.hidden"
-               v-html="$md.render(comment.text)" />
+               v-if="!comment.hidden">{{ comment.text }}</div>
           <div class="hidden-reason"
                v-else>
             Comment Hidden: {{ comment.hidden_reason }}
@@ -69,18 +68,23 @@
       userLoggedIn() {
         return this.$auth.loggedIn;
       },
+      sortedComments() {
+        return (this.commentThread.comments || []).sort((a, b) => {
+          return moment(a.created_at).valueOf() < moment(b.created_at).valueOf() ? -1 : 1;
+        });
+      }
     },
     methods: {
       commentCreatedAt(comment) {
         return moment(comment.created_at).format('MMMM Do YYYY HH:MM:ss')
       },
       replyButton_clickHandler() {
-        console.log('Reply clicked!');
-
-        this.$emit('replyCreated', {
-          replyText: this.reply,
-          commentThread: this.commentThread
-        });
+        if (this.reply && this.reply !== '' && this.reply.length < 1024) {
+          this.$emit('replyCreated', {
+            replyText: this.reply,
+            commentThread: this.commentThread
+          });
+        }
       }
     },
     props: {

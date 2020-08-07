@@ -22,7 +22,7 @@ module.exports = ({ env }) => {
       cors: {
         enabled: true,
         origin: env('CORS_ORIGIN_ALLOWED')
-      }
+      },
     }
   };
 };

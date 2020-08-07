@@ -25,6 +25,9 @@
     },
     "hidden_reason": {
       "type": "text"
+    },
+    "text_uncleaned": {
+      "type": "text"
     }
   }
 }

@@ -14,9 +14,9 @@
       "type": "string"
     },
     "users": {
-      "via": "blogPost",
       "plugin": "users-permissions",
-      "collection": "user"
+      "collection": "user",
+      "via": "blogPost"
     },
     "published_at": {
       "type": "datetime"
@@ -78,6 +78,9 @@
     },
     "tagline": {
       "type": "string"
+    },
+    "notifications_sent": {
+      "type": "boolean"
     }
   }
 }

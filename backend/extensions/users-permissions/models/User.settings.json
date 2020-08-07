@@ -61,8 +61,8 @@
       "required": false
     },
     "blogPost": {
-      "model": "blog-post",
-      "via": "users"
+      "via": "users",
+      "model": "blog-post"
     },
     "blog_series": {
       "collection": "blog-series",

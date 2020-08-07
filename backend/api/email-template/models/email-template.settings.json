@@ -16,13 +16,19 @@
     "description": {
       "type": "text"
     },
-    "html": {
+    "body": {
       "type": "text"
     },
     "template": {
       "type": "text"
     },
     "subject": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "custom_from_email": {
       "type": "string"
     }
   }

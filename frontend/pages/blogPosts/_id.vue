@@ -43,7 +43,7 @@
               v-html="$md.render(blogPost.content)"></div>
       </div>
 
-      <div class="content-section">
+      <div class="content-section" id="comments">
         <!-- Next and Previous -->
         <div class="blog-post-series-next-prev"
              v-if="!!thisBlogSeries">

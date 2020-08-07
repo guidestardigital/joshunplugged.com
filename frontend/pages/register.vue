@@ -26,6 +26,7 @@
         <input id="lastName" placeholder="Optional" />
         Password
         <input id="password" type="password" />
+        <TextByTag tag="signup_notice" class="notice" />
         <button type="submit">Signup</button>
         <div v-if="error" class="form-error">
           {{ error }}
@@ -36,58 +37,62 @@
 </template>
 
 <script>
+  import TextByTag from "~/components/TextByTag";
 
-export default {
-  data() {
-    return {
-      sending: false, 
-      success: false,
-      error: undefined
-    };
-  },
-  methods: {
-    register() {
-      this.sending = true;
-      this.error = undefined;
-      this.success = false;
+  export default {
+    data() {
+      return {
+        sending: false, 
+        success: false,
+        error: undefined
+      };
+    },
+    components: {
+      TextByTag
+    },
+    methods: {
+      register() {
+        this.sending = true;
+        this.error = undefined;
+        this.success = false;
 
-      fetch(process.env.BLOG_API_BASE + '/auth/local/register', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify({
-          username: document.getElementById('username').value,
-          email: document.getElementById('email').value,
-          password: document.getElementById('password').value,
-          firstName: document.getElementById('firstName').value,
-          lastName: document.getElementById('lastName').value,
+        fetch(process.env.BLOG_API_BASE + '/auth/local/register', {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer',
+          body: JSON.stringify({
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+          })
         })
-      })
-      .then(response => {
-        this.sending = false;
-        return response.json();
-      })
-      .then(response => {
-        if (!response) return;
-        
-        if (response.message) {
-          let message = "An error occurred registering. Please try again later.";
+        .then(response => {
+          this.sending = false;
+          return response.json();
+        })
+        .then(response => {
+          if (!response) return;
           
-          message = response.message.map(m => m.messages.map(m2 => m2.message).join('\n')).join('\n');
+          if (response.message) {
+            let message = "An error occurred registering. Please try again later.";
+            
+            message = response.message.map(m => m.messages.map(m2 => m2.message).join('\n')).join('\n');
 
-          this.error = message;
-        } else {
-          this.success = true;
-          this.user = response.user;
-        }
-      });
+            this.error = message;
+          } else {
+            this.success = true;
+            this.user = response.user;
+          }
+        });
+      }
     }
   }
-}
 </script>

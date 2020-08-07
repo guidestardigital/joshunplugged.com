@@ -30,6 +30,9 @@
     },
     "custom_from_email": {
       "type": "string"
+    },
+    "body_html": {
+      "type": "text"
     }
   }
 }

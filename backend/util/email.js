@@ -69,6 +69,7 @@ module.exports = {
 
       const subject = replace(emailTemplate.subject, finalVariables);
       const body = replace(emailTemplate.body, finalVariables);
+      const bodyHTML = replace(emailTemplate.body_html, finalVariables);
       
       console.log(`Sending email to ${toEmail} about ${subject}`, finalVariables);
 
@@ -76,7 +77,8 @@ module.exports = {
         to: toEmail,
         from: fromEmail,
         subject,
-        text: body
+        text: body,
+        html: bodyHTML
       });
     }));
 

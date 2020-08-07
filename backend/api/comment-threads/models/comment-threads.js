@@ -6,16 +6,16 @@ const emailUtil = require('../../../util/email');
  * to customize this model
  */
 
-const createOrUpdateHook = async function(type, result, data) {
-  console.log(`Comment thread created or updated: ${type}`, data);
-
-  const commentThread = await strapi.query('comment-threads').findOne({ id: parseInt(data.id) });
+const createOrUpdateHook = async function(type, commentThread, data) {
+  console.log(`Comment thread created or updated: ${type}`, commentThread.id);
 
   const sortedComments = commentThread.comments.slice().sort((a, b) => {
     return a.created_at.getTime() < b.created_at.getTime() ? -1 : 1;
   });
+
   const mostRecentComment = sortedComments.pop();
   console.log(mostRecentComment);
+
   const mostRecentCommenter = await strapi.query('user', 'users-permissions').findOne({ id: mostRecentComment.user });
   console.log(mostRecentCommenter);
 
@@ -28,8 +28,6 @@ const createOrUpdateHook = async function(type, result, data) {
     most_recent_comment_text_uncleaned: mostRecentComment.text_uncleaned,
     most_recent_comment_username: mostRecentCommenter.username
   });
-
-  console.log(emailResponse);
  };
 
 module.exports = {

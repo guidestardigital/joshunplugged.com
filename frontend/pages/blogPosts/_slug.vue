@@ -7,13 +7,13 @@
          class="hero blog-post-hero"
          :style="blogPostBackgroundHeader" />
 
-    <div class="content blog-body" id="top">
+    <div class="layout-content blog-body" id="top">
       <div class="content-header">
         <div class="blog-series-information"
             v-if="!!thisBlogSeries">
           <div class="series-intro">Part {{ blogPost.blog_series_order }} of Series</div> 
           <div class="blog-series-title">
-            <nuxt-link class="uk-link" :to="{ name: 'blogSeries-id', params: {id: thisBlogSeries.id} }">
+            <nuxt-link class="uk-link" :to="{ name: 'blogSeries-slug', params: {slug: thisBlogSeries.slug} }">
               {{ thisBlogSeries.title }}
             </nuxt-link>
           </div>
@@ -22,7 +22,7 @@
             <div v-for="bp in thisBlogSeriesBlogPosts"
                  :key="bp.id">
               <nuxt-link :class="{ 'uk-link': true, 'selected': bp.id == blogPost.id}" 
-                           :to="{ name: 'blogPosts-id', params: {id: bp.id}, hash: '#top' }">
+                           :to="{ name: 'blogPosts-slug', params: {slug: bp.slug}, hash: '#top' }">
                 {{ bp.title }}
               </nuxt-link>
             </div>
@@ -50,14 +50,14 @@
           <div class="vertical-description-link" v-if="prevPostInSeries">
             <div class="description">Previous</div>
             <nuxt-link class="uk-link"
-                        :to="{ name: 'blogPosts-id', params: {id: prevPostInSeries.id}, hash: '#top' }">
+                        :to="{ name: 'blogPosts-slug', params: {slug: prevPostInSeries.slug}, hash: '#top' }">
               {{ prevPostInSeries.title }}
             </nuxt-link>
           </div>
           <div class="vertical-description-link" v-if="nextPostInSeries">
             <div class="description">Next</div>
             <nuxt-link class="uk-link"
-                          :to="{ name: 'blogPosts-id', params: {id: nextPostInSeries.id}, hash: '#top' }">
+                          :to="{ name: 'blogPosts-slug', params: {slug: nextPostInSeries.slug}, hash: '#top' }">
               {{ nextPostInSeries.title }}
             </nuxt-link>
           </div>
@@ -82,9 +82,7 @@
 
 <script>
   import blogPostQuery from "~/apollo/queries/blogPost/blogPost";
-  import createComment from "~/apollo/queries/comments/createComment";
-  import createCommentThread from "~/apollo/queries/commentThreads/createCommentThread";
-  import updateCommentThread from "~/apollo/queries/commentThreads/updateCommentThread";
+  import { createComment } from "~/util/comments";
   
   import Link from "~/components/Link";
   import blogSeriessQuery from '~/apollo/queries/blogSeries/blogSeriess'
@@ -116,50 +114,15 @@
     },
     methods: {
       commentThread_replyCreated(reply) {
-        console.log('New Reply created', reply);
-
-        this.$apollo.mutate({
-            mutation: createComment,
-            variables: {
-              commentInput: {
-                user: this.$auth.user.id,
-                text: reply.replyText
-              }
-            }
-          }).then(response => {
-            console.log('comment created', response)
-
-            if (!reply.commentThread) {
-              this.$apollo.mutate({
-                mutation: createCommentThread,
-                variables: {
-                  commentThreadInput: {
-                    blog_post: this.blogPost.id,
-                    comments: [response.data.createComment.comment.id]
-                  }
-                }
-              }).then(response => {
-                this.blogPost.comment_thread = response.data.createCommentThread.commentThread;
-                this.commentThreadKey++;
-              })
-            } else {
-              this.$apollo.mutate({
-                mutation: updateCommentThread,
-                variables: {
-                  threadId: reply.commentThread.id,
-                  commentThreadInput: {
-                    comments: [
-                      ...reply.commentThread.comments.map(c => c.id),
-                      response.data.createComment.comment.id
-                    ]
-                  }
-                }
-              }).then(response => {
-                console.log('update thread created', response);
-                this.commentThreadKey++;
-              })
-            }
-          });
+        createComment(this.$apollo, {
+          userId: this.$auth.user.id, 
+          commentText: reply.replyText, 
+          commentThread: reply.commentThread, 
+          linkToBlogPostId: this.blogPost.id
+        }).then(commentThread => {
+          this.blogPost.comment_thread = commentThread;
+          this.commentThreadKey++;
+        })
       }
     },
     computed: {
@@ -212,7 +175,7 @@
         prefetch: true,
         query: blogPostQuery,
         variables() {
-          return { id: parseInt(this.$route.params.id) };
+          return { slug: parseInt(this.$route.params.slug) };
         }
       },
       blogSeries: {
@@ -221,7 +184,7 @@
       }
     },
     head () {
-      const title = this.blogPost ? (this.blogPost.title ? this.blogPost.title + ' / My Personal Blog' : 'My Personal Blog') : 'Title Error';
+      const title = this.blogPost ? (this.blogPost.title ? this.blogPost.title + ' / Josh Unplugged' : 'Josh Unplugged') : 'Title Error';
       const description = this.blogPost ? (this.blogPost.description ? this.blogPost.description : 'No description available') : 'Description Error';
       const imageHeader = this.blogPost ? (this.blogPost.image_header ? this.imageBaseUri + this.blogPost.image_header.url : '') : '';
 

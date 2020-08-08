@@ -55,6 +55,10 @@
     line-height: 1.75;
     width: 100%;
   
+    p {
+      margin-bottom: $size-5;
+    }
+    
     iframe {
       width: 100%;
     }

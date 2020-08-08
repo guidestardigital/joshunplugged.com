@@ -7,6 +7,7 @@ const createOrUpdateHook = async function(type, blog_post, data) {
   if (blog_post.public && 
       !blog_post.notifications_sent && 
       blog_post.title && 
+      blog_post.slug &&
       blog_post.tagline && 
       blog_post.description && 
       blog_post.content) {
@@ -19,11 +20,12 @@ const createOrUpdateHook = async function(type, blog_post, data) {
     const allUsersFiltered = allUsers.filter(user => !user.settings || !user.settings.notifications || user.settings.notifications.newBlogPosts);
 
     const emailResponse = await emailUtil.sendEmail({ users: allUsersFiltered }, 'new_blog_post', {
-      blog_post_id: blog_post.id.toString(),
-      blog_post_title: blog_post.title,
-      blog_post_description: blog_post.description,
-      blog_post_tagline: blog_post.tagline
-    });
+      id: blog_post.id.toString(),
+      slug: blog_post.slug,
+      title: blog_post.title,
+      description: blog_post.description,
+      tagline: blog_post.tagline
+    }, 'New Blog Post');
 
     console.log('Updating the blog post data to set notifications_sent to true...');
 

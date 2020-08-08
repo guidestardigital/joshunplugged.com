@@ -20,8 +20,8 @@
       "type": "boolean"
     },
     "comment_thread": {
-      "model": "comment-threads",
-      "via": "comments"
+      "via": "comments",
+      "model": "comment-threads"
     },
     "hidden_reason": {
       "type": "text"

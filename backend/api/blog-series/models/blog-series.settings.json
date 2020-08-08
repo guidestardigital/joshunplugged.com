@@ -17,8 +17,8 @@
       "type": "richtext"
     },
     "blog_posts": {
-      "via": "blog_series",
-      "collection": "blog-post"
+      "collection": "blog-post",
+      "via": "blog_series"
     },
     "blog_post_categories": {
       "collection": "blog-post-category",
@@ -38,12 +38,15 @@
       "type": "datetime"
     },
     "authors": {
-      "via": "blog_series",
       "plugin": "users-permissions",
       "collection": "user",
+      "via": "blog_series",
       "dominant": true
     },
     "background_color": {
+      "type": "string"
+    },
+    "slug": {
       "type": "string"
     }
   }

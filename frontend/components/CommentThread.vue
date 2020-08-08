@@ -11,7 +11,7 @@
             :key="comment.id"
             v-for="comment in sortedComments">
           <div class="comment-header">
-            <div class="username">{{ comment.user.username }}</div>
+            <div class="username">{{ commentUsername(comment) }}</div>
             <div class="created-at">{{ commentCreatedAt(comment) }}</div>
           </div>
           <div class="text"
@@ -75,6 +75,9 @@
       }
     },
     methods: {
+      commentUsername(comment) {
+        return comment.user ? comment.user.username : 'Anonymous';
+      },
       commentCreatedAt(comment) {
         return moment(comment.created_at).format('MMMM Do YYYY HH:MM:ss')
       },
@@ -101,6 +104,9 @@
         fetchPolicy: 'no-cache',
         variables() {
           return { id: parseInt(this.threadId) }
+        },
+        skipQuery() {
+          return parseInt(this.threadId) === -1;
         }
       }
     }

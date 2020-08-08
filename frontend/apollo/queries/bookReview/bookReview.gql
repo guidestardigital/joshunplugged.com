@@ -1,0 +1,40 @@
+query BookReview($slug: String!) {  
+  bookReviews(where: { slug: $slug }) {
+    id
+    title
+    content
+    opinion
+    rating
+    published_at
+    book_published_date
+    slug
+    topics
+    authors {
+      id
+      public
+      first_name
+      last_name
+      description
+      slug
+      avatar {
+        url
+      }
+    }
+    quotes {
+      id
+      excerpt
+      content
+      description
+      date
+    }
+    cover {
+      url
+    }
+    images {
+      url
+    }
+    comment_thread {
+      id
+    }
+  }
+}

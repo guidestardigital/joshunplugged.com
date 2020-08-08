@@ -1,14 +1,14 @@
 const replace = require('prop-replace').replace;
 
 module.exports = {
-  async sendMasterEmail(emailTemplateTag, variables) {
+  async sendMasterEmail(emailTemplateTag, variables, reason) {
     console.log(strapi.config);
 
     this.sendEmail({ 
       toEmails: [strapi.config.custom.masterEmail]
-    }, emailTemplateTag, variables);
+    }, emailTemplateTag, variables, reason);
   },
-  async sendEmail({ toUserIds = undefined, toEmails = undefined, users = undefined }, emailTemplateTag, variables) {
+  async sendEmail({ toUserIds = undefined, toEmails = undefined, users = undefined }, emailTemplateTag, variables, reason) {
     const emailTemplate = await strapi.query('email-template').findOne({ tag: emailTemplateTag });
 
     variables = {
@@ -79,7 +79,16 @@ module.exports = {
         subject,
         text: body,
         html: bodyHTML
-      });
+      }).then(result => strapi.query('notifications').create({
+        to_user: user ? user.id : undefined,
+        to_email: toEmail,
+        subject,
+        body,
+        body_html: bodyHTML,
+        variables: finalVariables,
+        type: 'email',
+        reason
+      }));
     }));
 
     return finalResults;

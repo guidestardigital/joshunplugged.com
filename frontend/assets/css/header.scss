@@ -1,6 +1,6 @@
 @import './variables.scss';
 
-.header {
+.page-header {
   position: fixed;
   top: 0;
   z-index: 1000;
@@ -11,6 +11,8 @@
   align-items: center;
   border-bottom: 1px solid $color_grey_superlight;
   background: $color_white;
+  // For Windows browsers with the scrollbar
+  margin-right: $size-5;
 
   .logo {
     font-size: 38px;
@@ -38,6 +40,10 @@
 
       a {
         margin: $size-5;
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          margin: $size-3;
+        }
       }
     }
 

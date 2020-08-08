@@ -65,8 +65,8 @@
       "model": "blog-post"
     },
     "blog_series": {
-      "collection": "blog-series",
-      "via": "authors"
+      "via": "authors",
+      "collection": "blog-series"
     },
     "firstName": {
       "type": "string"
@@ -76,6 +76,10 @@
     },
     "settings": {
       "type": "json"
+    },
+    "notifications": {
+      "via": "to_user",
+      "collection": "notifications"
     }
   }
 }

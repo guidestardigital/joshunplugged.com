@@ -16,7 +16,7 @@
           </div>
           <div class="text-block">
             <div v-if="blogPost.postCategory" class="uk-text-uppercase">{{ blogPost.postCategory.name }}</div>
-            <nuxt-link :to="{ name: 'blogPosts-id', params: {id: blogPost.id} }"
+            <nuxt-link :to="{ name: 'blogPosts-slug', params: {slug: blogPost.slug} }"
                          class="story-title">{{ blogPost.title }}</nuxt-link>
             <div class="date-count-block">
               <div class="date"
@@ -24,7 +24,7 @@
               <div class="count"
                    v-if="!!blogPost.blog_series">{{blogPost.blog_series_order}} of {{blogPost.blog_series.blog_posts.length}}
                 <nuxt-link v-if="showSeriesLink"
-                             :to="{ name: 'blogSeries-id', params: {id: blogPost.blog_series.id} }"
+                             :to="{ name: 'blogSeries-slug', params: {slug: blogPost.blog_series.slug} }"
                              class="story-title">in {{blogPost.blog_series.title}}</nuxt-link>
               </div>
             </div>

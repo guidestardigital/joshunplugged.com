@@ -16,8 +16,8 @@
       "type": "datetime"
     },
     "comments": {
-      "via": "comment_thread",
-      "collection": "comments"
+      "collection": "comments",
+      "via": "comment_thread"
     },
     "type": {
       "type": "string"
@@ -25,6 +25,14 @@
     "blog_post": {
       "via": "comment_thread",
       "model": "blog-post"
+    },
+    "book_review": {
+      "via": "comment_thread",
+      "model": "book-review"
+    },
+    "person": {
+      "via": "comment_thread",
+      "model": "person"
     }
   }
 }

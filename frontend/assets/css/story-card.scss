@@ -25,6 +25,13 @@
     .image {
       object-fit: cover;
     }
+
+    &.contain {
+      .image {
+        height: 100%;
+        object-fit: contain;
+      }
+    }
   }
 
   .text-block {
@@ -47,9 +54,13 @@
       display: flex;
       justify-content: space-between;
       flex-direction: row;
-      margin: $size-4 0;
+      margin-top: $size-4;
 
       a {
+        font-size: 12px;
+      }
+
+      .date {
         font-size: 12px;
       }
 
@@ -64,11 +75,26 @@
       font-size: 12px;
     }
 
-    .date {
+    .item {
       font-size: 12px;
+      margin: $size-5 0;
+    }
+
+    .sub-block-horizontal {
+      margin-top: $size-4;
+      display: flex;
+      flex-direction: horizontal;
+      justify-content: flex-start;
+      font-size: 12px;
+      align-items: center;
+
+      > * {
+        margin-right: $size-3;
+      }
     }
 
     .description {
+      margin-top: $size-4;
       font-size: 12px;
       text-decoration: none;
       border-top: 1px solid $color_grey_superlight;

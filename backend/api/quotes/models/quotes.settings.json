@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quotes",
+  "info": {
+    "name": "Quotes"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "content": {
+      "type": "richtext"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "links": {
+      "collection": "link",
+      "via": "quote"
+    },
+    "description": {
+      "type": "text"
+    },
+    "book_reviews": {
+      "via": "quotes",
+      "collection": "book-review"
+    },
+    "excerpt": {
+      "type": "string"
+    },
+    "person": {
+      "via": "quotes",
+      "model": "person"
+    },
+    "location": {
+      "type": "string"
+    }
+  }
+}

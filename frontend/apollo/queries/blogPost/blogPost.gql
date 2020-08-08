@@ -1,6 +1,7 @@
-query BlogPosts($id: ID!) {  
-  blogPost(id: $id) {
+query BlogPosts($slug: String!) {  
+  blogPost(where: { slug: $slug }) {
     id
+    slug
     title
     description
     content

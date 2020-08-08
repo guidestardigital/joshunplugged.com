@@ -1,0 +1,37 @@
+query People($slug: String!) {  
+  people(where: { slug: $slug }) {
+    id
+    public
+    description
+    first_name
+    last_name
+    content
+    homepage {
+      id
+      url
+      title
+    }
+    avatar {
+      url
+    }
+    images {
+      url
+    }
+    links {
+      id
+      url
+      title
+      description
+    }
+    quotes {
+      id
+      excerpt
+      content
+      description
+      date
+    }
+    comment_thread {
+      id
+    }
+  }
+}

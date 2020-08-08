@@ -3,10 +3,20 @@
     <div class="hero-image">
       <ImageSingle target="hero_image" />
     </div>
-    <div class="content">
+    <div class="layout-content">
       <div class="content-section">
+        <div class="section-title">Series</div>
         <BlogSeriessCards :blogSeriess="blogSeries" />
-        <BlogPostsCards v-if="blogPosts" :blogPosts="blogPosts.filter(bp => !bp.show_in_series_only)" />
+      </div>
+      <div class="content-section">
+        <div class="section-title">Latest Posts</div>
+        <BlogPostsCards v-if="blogPosts" 
+                        :blogPosts="blogPosts.filter(bp => !bp.show_in_series_only)" />
+      </div>
+      <div class="content-section">
+        <div class="section-title">Book Reviews</div>
+        <BookReviewPostCards v-if="bookReviews" 
+                             :bookReviews="bookReviews" />
       </div>
     </div>
   </div>
@@ -14,10 +24,14 @@
 
 <script>
 import Footer from "~/layouts/Footer";
+
 import blogPostsQuery from '~/apollo/queries/blogPost/blogPosts'
 import blogSeriessQuery from '~/apollo/queries/blogSeries/blogSeriess'
+import bookReviewsQuery from '~/apollo/queries/bookReview/bookReviews'
+
 import BlogPostsCards from '~/components/BlogPostsCards'
 import BlogSeriessCards from '~/components/BlogSeriessCards'
+import BookReviewPostCards from '~/components/BookReviewPostCards'
 import ImageSingle from '~/components/ImageSingle'
 
 export default {
@@ -30,6 +44,7 @@ export default {
   components: {
     BlogPostsCards,
     BlogSeriessCards,
+    BookReviewPostCards,
     ImageSingle
   },
   apollo: {
@@ -40,6 +55,10 @@ export default {
     blogSeries: {
       prefetch: true,
       query: blogSeriessQuery
+    },
+    bookReviews: {
+      prefetch: true,
+      query: bookReviewsQuery
     }
   },
   head () {

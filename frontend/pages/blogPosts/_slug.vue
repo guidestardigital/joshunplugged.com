@@ -103,6 +103,7 @@
     },
     components: {
       Link,
+      Loader,
       CommentThread
     },
     computed: {

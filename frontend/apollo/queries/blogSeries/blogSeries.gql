@@ -21,6 +21,7 @@ query BlogPostSeries($id: ID!) {
     blog_posts {
       id
       title
+      slug
       show_description
       description
       published_at

@@ -13,6 +13,7 @@ query BlogPosts($slug: String!) {
     show_description
     blog_series_order
     image_header {
+      id
       url
     }
     blog_series {

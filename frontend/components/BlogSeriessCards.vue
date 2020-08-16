@@ -17,9 +17,9 @@
                v-if="blogSeries.published_at">{{ publishedAtFormatted(blogSeries.published_at) }}</div>
           <div class="count">{{blogSeries.blog_posts.length}} Part Series</div>
         </div>
-        <div class="description" 
-            v-if="blogSeries.description">
-          {{ blogSeries.description }}
+        <div class="description"
+             v-html="$md.render(blogSeries.description)"
+             v-if="blogSeries.description">
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@
             <div class="date-count-block">
               <div class="date"
                   v-if="blogPost.published_at">{{ publishedAtFormatted(blogPost.published_at) }}</div>
-              <div class="count"
+              <div class="count"  
                    v-if="!!blogPost.blog_series">{{blogPost.blog_series_order}} of {{blogPost.blog_series.blog_posts.length}}
                 <nuxt-link v-if="showSeriesLink"
                              :to="{ name: 'blogSeries-slug', params: {slug: blogPost.blog_series.slug} }"
@@ -30,8 +30,8 @@
             </div>
             <div class="description" 
                  v-if="blogPost.show_description && blogPost.description" 
+                 v-html="$md.render(blogPost.description)"
                  :style="{ 'color': blogPost.foreground_color }">
-              {{ blogPost.description }}
             </div>
           </div>
       </div>

@@ -15,6 +15,7 @@ query CommentThread($id: ID!) {
         lastName
         blocked
         image {
+          id
           url
         }
       }

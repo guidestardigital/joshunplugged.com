@@ -167,25 +167,6 @@ ul {
   padding: 0;
 }
 
-table {
-  margin: 0.5rem;
-  width: 100%;
-
-  tr:first-child {
-    font-weight: bold;
-  }
-
-  tr {
-    border-top: 1px solid $color_theme_2;
-    border-bottom: 2px solid $color_theme_2;
-    padding: 0.5rem 0;
-
-    td {
-      padding: 1rem;
-    }
-  }
-}
-
 .footer {
   background-color: $color_theme_3;
   min-height: 120px;

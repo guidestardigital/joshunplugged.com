@@ -6,6 +6,7 @@ query Links($key: String) {
     url
     target
     icon {
+      id
       url
     }
   }

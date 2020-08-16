@@ -8,7 +8,7 @@
         <div class="content-header">
           <div class="content-title-block">
             <div class="content-title">Book Reviews</div>
-            <div class="content-description">All of my book reviews, sorted descending by published date.</div>
+            <div class="content-description"><TextByTag tag="book_reviews_page"></TextByTag></div>
           </div>
         </div>
         <div class="content-section">
@@ -28,6 +28,7 @@
   import BookReviewPostCards from "~/components/BookReviewPostCards";
   import moment from 'moment';
   import Loader from "~/components/Loader";
+  import TextByTag from "~/components/TextByTag";
   import { publishedAt } from '~/util/dates';
   
   export default {
@@ -39,7 +40,8 @@
     },
     components: {
       BookReviewPostCards,
-      Loader
+      Loader,
+      TextByTag
     },
     computed: {
       publishedAtFormatted(date) {

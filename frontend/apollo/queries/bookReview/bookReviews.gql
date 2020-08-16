@@ -16,10 +16,12 @@ query BookReviews {
       description
       slug
       avatar {
+        id
         url
       }
     }
     cover {
+      id
       url
     }
   }

@@ -13,9 +13,11 @@ query People {
       title
     }
     avatar {
+      id
       url
     }
     images {
+      id
       url
     }
     links {

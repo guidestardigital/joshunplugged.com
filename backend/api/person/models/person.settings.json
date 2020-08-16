@@ -55,16 +55,16 @@
       "dominant": true
     },
     "book_reviews": {
-      "via": "authors",
       "collection": "book-review",
+      "via": "authors",
       "dominant": true
     },
     "slug": {
       "type": "string"
     },
     "quotes": {
-      "collection": "quotes",
-      "via": "person"
+      "via": "person",
+      "collection": "quotes"
     },
     "public": {
       "type": "boolean"
@@ -78,6 +78,11 @@
     },
     "homepage": {
       "model": "link"
+    },
+    "media": {
+      "via": "people",
+      "collection": "medias",
+      "dominant": true
     }
   }
 }

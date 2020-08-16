@@ -22,19 +22,25 @@
     "description": {
       "type": "text"
     },
-    "book_reviews": {
-      "via": "quotes",
-      "collection": "book-review"
+    "book_review": {
+      "model": "book-review",
+      "via": "quotes"
     },
     "excerpt": {
       "type": "string"
     },
     "person": {
-      "via": "quotes",
-      "model": "person"
+      "model": "person",
+      "via": "quotes"
     },
     "location": {
       "type": "string"
+    },
+    "book_order": {
+      "type": "integer"
+    },
+    "public": {
+      "type": "boolean"
     }
   }
 }

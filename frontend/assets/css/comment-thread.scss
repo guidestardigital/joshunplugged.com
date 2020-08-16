@@ -32,6 +32,11 @@
     }
   }
 
+  .not-logged-in {
+    text-align: center;
+    margin-top: $size-5;
+  }
+
   .thread {
     margin: $size-5;
   }

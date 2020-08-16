@@ -6,7 +6,7 @@
 
       <!-- Comment Thread -->
       <div class="thread" 
-          v-if="!!commentThread">
+          v-if="!!commentThread && sortedComments.length">
         <div class="comment"
             :key="comment.id"
             v-for="comment in sortedComments">

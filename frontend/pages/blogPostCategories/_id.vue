@@ -1,6 +1,7 @@
 <template>
   <Loader :loading="loading || !blogPostCategory">
-    <div class="layout-content" v-if="blogPostCategory">
+    <div class="layout-content" 
+         v-if="blogPostCategory">
       <div class="content-header">
         <div class="content-title-block">
           <div class="content-title">{{ blogPostCategory.name }}</div>

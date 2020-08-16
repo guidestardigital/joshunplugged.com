@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medias",
+  "info": {
+    "name": "Medias"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "embed": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "YouTube",
+        "MP4"
+      ]
+    },
+    "people": {
+      "collection": "person",
+      "via": "media"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

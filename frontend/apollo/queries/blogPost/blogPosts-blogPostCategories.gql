@@ -5,6 +5,7 @@ query Category($id: ID!){
     description
     blog_posts {
       id
+      slug
       title
       published_at
       background_color
@@ -14,10 +15,12 @@ query Category($id: ID!){
       use_default_post_background
       show_description
       image_header {
+        id
         url
       }
       blog_series {
         id
+        slug
         title
         blog_posts {
           id

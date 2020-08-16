@@ -1,5 +1,5 @@
 <template>
-  <div class="login-page content">
+  <div class="login-page layout-content">
     <div class="content-header">
       <div class="content-title-block">
         <div class="content-title">Login</div>

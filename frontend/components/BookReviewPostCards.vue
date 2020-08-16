@@ -29,6 +29,7 @@
             <div v-for="topic in bookReview.topics.split(',')"
                  class="chip"
                  :key="topic">{{topic}}</div>
+            <Rating :rating="bookReview.rating" />
           </div>
           <div class="description"
                 v-if="bookReview.description">
@@ -42,12 +43,16 @@
 
 <script>
   import moment from 'moment';
+  import Rating from '~/components/Rating';
 
   export default {
     methods: {
       publishedAtFormatted(published_at) {
         return !published_at ? '' : moment(published_at).format('MMMM Do YYYY');
       }
+    },
+    components: {
+      Rating
     },
     computed: {
       bookReviewsSorted() {

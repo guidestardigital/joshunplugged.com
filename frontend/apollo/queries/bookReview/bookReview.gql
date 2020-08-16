@@ -17,6 +17,7 @@ query BookReview($slug: String!) {
       description
       slug
       avatar {
+        id
         url
       }
     }
@@ -26,11 +27,16 @@ query BookReview($slug: String!) {
       content
       description
       date
+      public
+      book_order
+      location
     }
     cover {
+      id
       url
     }
     images {
+      id
       url
     }
     comment_thread {

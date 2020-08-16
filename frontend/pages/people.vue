@@ -8,7 +8,8 @@
         <div class="content-header">
           <div class="content-title-block">
             <div class="content-title">Important People</div>
-            <div class="content-description">People in books I have read, conferences attended, or well known in history or the community.</div>
+            
+            <div class="content-description"><TextByTag tag="people_page"></TextByTag></div>
           </div>
         </div>
         <div class="content-section">
@@ -28,6 +29,7 @@
   import PeoplePostCards from "~/components/PeoplePostCards";
   import moment from 'moment';
   import Loader from "~/components/Loader";
+  import TextByTag from "~/components/TextByTag";
   import { publishedAt } from '~/util/dates';
   
   export default {
@@ -39,7 +41,8 @@
     },
     components: {
       PeoplePostCards,
-      Loader
+      Loader,
+      TextByTag
     },
     apollo: {
       people: {

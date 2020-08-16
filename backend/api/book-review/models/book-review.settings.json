@@ -35,8 +35,8 @@
       "required": false
     },
     "authors": {
-      "collection": "person",
-      "via": "book_reviews"
+      "via": "book_reviews",
+      "collection": "person"
     },
     "publisher_link": {
       "model": "link"
@@ -66,11 +66,6 @@
     "public": {
       "type": "boolean"
     },
-    "quotes": {
-      "collection": "quotes",
-      "via": "book_reviews",
-      "dominant": true
-    },
     "book_published_date": {
       "type": "date"
     },
@@ -79,6 +74,10 @@
     },
     "notifications_sent": {
       "type": "boolean"
+    },
+    "quotes": {
+      "via": "book_review",
+      "collection": "quotes"
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="registration-page content">
+  <div class="registration-page layout-content">
     <div class="content-header">
       <div class="content-title-block">
         <div class="content-title">Register</div>

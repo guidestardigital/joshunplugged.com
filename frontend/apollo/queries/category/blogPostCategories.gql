@@ -5,6 +5,8 @@ query BlogPostCategories {
     description
     blog_posts {
       id
+      slug
+      title
     }
   }
 }

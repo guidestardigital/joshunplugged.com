@@ -6,12 +6,13 @@
     </div>
     <div class="controls">
       <div class="categories">
-        <nuxt-link :to="{ name: 'bookReviews' }" tag="a">Book Reviews</nuxt-link>
-        <nuxt-link :to="{ name: 'people' }" tag="a">People</nuxt-link>
+        <nuxt-link to="/">Home</nuxt-link>
+        <nuxt-link :to="{ name: 'bookReviews' }">Book Reviews</nuxt-link>
+        <nuxt-link :to="{ name: 'people' }">People</nuxt-link>
         <nuxt-link v-for="blogPostCategory in blogPostCategories" 
                     v-bind:key="blogPostCategory.id" 
                     :to="{ name: 'blogPostCategories-id', params: { id: blogPostCategory.id }}"
-                    tag="a">{{ blogPostCategory.name }}</nuxt-link>
+                   >{{ blogPostCategory.name }}</nuxt-link>
       </div>
       <div class="auth">
         <div class="username" v-if="user">

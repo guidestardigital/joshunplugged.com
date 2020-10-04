@@ -1,0 +1,83 @@
+{
+  "kind": "collectionType",
+  "collectionName": "book_reviews",
+  "info": {
+    "name": "Book Review"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "cover": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "authors": {
+      "via": "book_reviews",
+      "collection": "person"
+    },
+    "publisher_link": {
+      "model": "link"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "published_at": {
+      "type": "datetime"
+    },
+    "comment_thread": {
+      "model": "comment-threads",
+      "via": "book_review"
+    },
+    "description": {
+      "type": "text"
+    },
+    "topics": {
+      "type": "string"
+    },
+    "public": {
+      "type": "boolean"
+    },
+    "book_published_date": {
+      "type": "date"
+    },
+    "opinion": {
+      "type": "richtext"
+    },
+    "notifications_sent": {
+      "type": "boolean"
+    },
+    "quotes": {
+      "via": "book_review",
+      "collection": "quotes"
+    }
+  }
+}

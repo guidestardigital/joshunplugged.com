@@ -1,0 +1,13 @@
+@import './variables.scss';
+
+.registration-page {
+  .username, .email {
+    font-weight: bold;
+  }
+
+  .notice {
+    width: 100%;
+    margin: $size-5;
+    font-size: 14px;
+  }
+}

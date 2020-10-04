@@ -1,0 +1,7 @@
+query Text($tag: String) {  
+  texts(where: { tag: $tag }) {
+    id
+    tag
+    text
+  }
+}

@@ -1,0 +1,80 @@
+@import './variables.scss';
+
+.comment-thread {
+  margin: $size-5;
+  border-top: 1px solid $color_grey_superlight;
+  min-width: 320px;
+
+  .title {
+    font-size: 32px;
+    font-family: Staatliches;
+    margin: $size-5 0;
+    text-align: center;
+    font-weight: normal;
+  }
+
+  .reply {
+    .comment-notice {
+      font-style: italic;
+      margin: $size-5;
+      font-size: 11px;
+    }
+
+    .reply-input {
+      width: calc(100% - #{$size-5 * 2});
+      padding: $size-3;
+      margin: $size-5;
+    }
+
+    .controls {
+      text-align: right;
+      margin: 0 $size-5;
+    }
+  }
+
+  .not-logged-in {
+    text-align: center;
+    margin-top: $size-5;
+  }
+
+  .thread {
+    margin: $size-5;
+  }
+
+  .thread {
+    .comment {
+      margin: $size-3;
+      padding: $size-3;
+      border-left: 1px solid $color_grey_superlight;
+
+      .comment-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 11px;
+        margin-bottom: $size-3;
+
+        .username {
+        }
+
+        .date {
+
+        }
+      }
+
+      .text {
+        p {
+          margin: 0;
+        }
+      }
+
+      .hidden-reason {
+        color: $color_grey;
+        font-size: 10px;
+      }
+    }
+  }
+  .no-comments {
+    text-align: center;
+  }
+}

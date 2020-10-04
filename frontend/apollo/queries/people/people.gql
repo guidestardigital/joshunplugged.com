@@ -1,0 +1,40 @@
+query People {  
+  people(where: { public: true }) {
+    id
+    first_name
+    last_name
+    birth_date
+    death_date
+    description
+    slug
+    homepage {
+      id
+      url
+      title
+    }
+    avatar {
+      id
+      url
+    }
+    images {
+      id
+      url
+    }
+    links {
+      id
+      url
+      title
+      description
+    }
+    quotes {
+      id
+      excerpt
+      content
+      description
+      date
+    }
+    comment_thread {
+      id
+    }
+  }
+}

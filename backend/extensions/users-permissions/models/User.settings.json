@@ -67,6 +67,19 @@
     "blog_series": {
       "via": "authors",
       "collection": "blog-series"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "json"
+    },
+    "notifications": {
+      "via": "to_user",
+      "collection": "notifications"
     }
   }
 }

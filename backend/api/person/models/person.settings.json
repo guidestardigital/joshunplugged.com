@@ -1,0 +1,88 @@
+{
+  "kind": "collectionType",
+  "collectionName": "people",
+  "info": {
+    "name": "Person"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "avatar": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "birth_date": {
+      "type": "date"
+    },
+    "death_date": {
+      "type": "date"
+    },
+    "links": {
+      "collection": "link",
+      "via": "people",
+      "dominant": true
+    },
+    "book_reviews": {
+      "collection": "book-review",
+      "via": "authors",
+      "dominant": true
+    },
+    "slug": {
+      "type": "string"
+    },
+    "quotes": {
+      "via": "person",
+      "collection": "quotes"
+    },
+    "public": {
+      "type": "boolean"
+    },
+    "comment_thread": {
+      "model": "comment-threads",
+      "via": "person"
+    },
+    "opinion": {
+      "type": "richtext"
+    },
+    "homepage": {
+      "model": "link"
+    },
+    "media": {
+      "via": "people",
+      "collection": "medias",
+      "dominant": true
+    }
+  }
+}

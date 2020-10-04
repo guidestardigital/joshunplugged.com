@@ -1,6 +1,6 @@
 <template>
   <a class="uk-link" :href="link.url" :target="link.target">
-    <img class="icon" :src="imageBaseUri + link.icon.url" v-if="!!link.icon" />
+    <img class="icon" :src="link.icon.url" v-if="!!link.icon" />
     <span>
       {{ link.title }}
     </span>
@@ -13,8 +13,7 @@
   export default {
     data() {
       return {
-        link: {},
-        imageBaseUri: process.env.IMAGE_BASE_URI || ''
+        link: {}
       }
     },
     props: {

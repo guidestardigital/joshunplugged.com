@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "name": "Notifications"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "to_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "notifications"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "body_html": {
+      "type": "text"
+    },
+    "type": {
+      "type": "string"
+    },
+    "variables": {
+      "type": "json"
+    },
+    "to_email": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

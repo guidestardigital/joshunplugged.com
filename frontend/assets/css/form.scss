@@ -1,0 +1,26 @@
+@import './variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  min-width: 250px;
+
+  input, button {
+    margin: $size-5;
+    padding: $size-3;
+    border: 1px solid $color_grey;
+    border-radius: 0;
+  }
+}
+
+.form-confirmation {
+  border: 1px solid $color_green;
+  margin: $size-5;
+  padding: $size-5;
+}
+
+.form-error {
+  color: $color_red;
+  font-weight: bold;
+}

@@ -11,15 +11,15 @@
              v-if="blogSeries.image_header">
       </div>
       <div class="text-block">
-        <router-link class="story-title" :to="{ name: 'blogSeries-id', params: {id: blogSeries.id} }">{{ blogSeries.title }}</router-link>
+        <nuxt-link class="story-title" :to="{ name: 'blogSeries-id', params: {id: blogSeries.id} }">{{ blogSeries.title }}</nuxt-link>
         <div class="date-count-block">
           <div class="date" 
                v-if="blogSeries.published_at">{{ publishedAtFormatted(blogSeries.published_at) }}</div>
           <div class="count">{{blogSeries.blog_posts.length}} Part Series</div>
         </div>
-        <div class="description" 
-            v-if="blogSeries.description">
-          {{ blogSeries.description }}
+        <div class="description"
+             v-html="$md.render(blogSeries.description)"
+             v-if="blogSeries.description">
         </div>
       </div>
     </div>

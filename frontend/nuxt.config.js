@@ -5,14 +5,15 @@ require('dotenv').config({ path: envPath });
 console.log('-----------------------------------------------------------------');
 console.log(`Loading from ${envPath}:`)
 console.log(` IMAGE_BASE_URI: ${process.env.IMAGE_BASE_URI}`)
-console.log(` STRAPI_BASE_URL: ${process.env.STRAPI_BASE_URL}`)
-console.log(` NOTE: STRAPI_BASE_URL will default to http://localhost:1337 if not specified.`)
+console.log(` BLOG_API_BASE: ${process.env.BLOG_API_BASE}`)
 console.log('-----------------------------------------------------------------');
 
 module.exports = {
   mode: 'universal',
   env: {
-    IMAGE_BASE_URI: process.env.IMAGE_BASE_URI || ''
+    IMAGE_BASE_URI: process.env.IMAGE_BASE_URI || '',
+    BLOG_API_BASE: process.env.BLOG_API_BASE || 'BLOG_API_BASE',
+    BLOG_TITLE: process.env.BLOG_TITLE || 'BLOG_TITLE'
   },
   /*
   ** Headers of the page
@@ -51,14 +52,12 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'uikit/dist/css/uikit.min.css',
     '@assets/css/main.scss'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/uikit.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -71,26 +70,46 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     '@nuxtjs/apollo',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    '@nuxtjs/auth',
+    '@nuxtjs/proxy'
   ],
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/auth/local',
+            method: 'post',
+            propertyName: 'jwt'
+          },
+          user: {
+            url: '/users/me', 
+            method: 'get', 
+            propertyName: false
+          }
+        },
+        tokenName: 'Authorization',
+        tokenType: 'Bearer'
+      }
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: process.env.BLOG_API_BASE,
+    credentials: true
   },
   apollo: {  
     clientConfigs: {
       default: {
-        // NOTE: STRAPI_BASE_URL comes from the docker build NOT from the .env file!!!
-        httpEndpoint: process.env.STRAPI_BASE_URL ? process.env.STRAPI_BASE_URL + '/graphql' : "http://localhost:1337/graphql"
+        httpEndpoint: process.env.BLOG_API_BASE ? process.env.BLOG_API_BASE + '/graphql' : "http://localhost:1337/graphql"
       }
     }
   },
@@ -131,5 +150,19 @@ module.exports = {
     // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
     // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
     quotes: '“”‘’',
+  },
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      if (to.hash) {
+        setTimeout(() => {
+          window.scrollTo({ 
+            top: document.querySelector(to.hash).offsetTop, 
+            behavior: 'smooth'
+          });
+        },100);
+      }
+
+      return window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }

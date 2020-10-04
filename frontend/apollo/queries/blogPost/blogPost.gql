@@ -1,6 +1,7 @@
-query BlogPosts($id: ID!) {  
-  blogPost(id: $id) {
+query BlogPosts($slug: String!) {  
+  blogPosts(where: { slug: $slug }) {
     id
+    slug
     title
     description
     content
@@ -12,11 +13,13 @@ query BlogPosts($id: ID!) {
     show_description
     blog_series_order
     image_header {
+      id
       url
     }
     blog_series {
       id
       title
+      slug
       blog_posts {
         id
       }
@@ -30,6 +33,9 @@ query BlogPosts($id: ID!) {
       icon {
         url
       }
+    }
+    comment_thread {
+      id
     }
   }
 }

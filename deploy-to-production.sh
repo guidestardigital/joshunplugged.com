@@ -12,7 +12,6 @@ BLOG_HOME=$(read_var BLOG_HOME .env)
 DOCKER_EXTERNAL_REPO=$(read_var DOCKER_EXTERNAL_REPO .env)
 DOCKER_BACKEND_IMAGE=$(read_var DOCKER_BACKEND_IMAGE .env)
 DOCKER_FRONTEND_IMAGE=$(read_var DOCKER_FRONTEND_IMAGE .env)
-BLOG_HOME=$(read_var BLOG_HOME .env)
 
 echo "----------------------------------------------------------------------"
 echo "DID YOU FORGET TO PUSH YOUR DOCKER IMAGES? (CTRL+C to cancel deployment):"

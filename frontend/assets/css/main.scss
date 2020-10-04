@@ -7,8 +7,12 @@
 @import './story-card.scss';
 @import './blog-post.scss';
 @import './loader.scss';
+@import './form.scss';
+@import './login.scss';
+@import './register.scss';
+@import './comment-thread.scss';
 
-html, body {
+html {
   width: 100%;
   height: 100%;
   margin:0;
@@ -18,8 +22,10 @@ html, body {
 }
 
 body {
-  position: relative;
   background: $color_white;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
 
   .body {
     background: $color_white;
@@ -159,25 +165,6 @@ ul {
 .uk-container-large {
   margin: 0;
   padding: 0;
-}
-
-table {
-  margin: 0.5rem;
-  width: 100%;
-
-  tr:first-child {
-    font-weight: bold;
-  }
-
-  tr {
-    border-top: 1px solid $color_theme_2;
-    border-bottom: 2px solid $color_theme_2;
-    padding: 0.5rem 0;
-
-    td {
-      padding: 1rem;
-    }
-  }
 }
 
 .footer {

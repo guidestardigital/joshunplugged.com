@@ -1,6 +1,6 @@
 @import './variables.scss';
 
-.header {
+.page-header {
   position: fixed;
   top: 0;
   z-index: 1000;
@@ -11,6 +11,8 @@
   align-items: center;
   border-bottom: 1px solid $color_grey_superlight;
   background: $color_white;
+  // For Windows browsers with the scrollbar
+  margin-right: $size-5;
 
   .logo {
     font-size: 38px;
@@ -19,17 +21,43 @@
 
     a {
       text-decoration: none;
+      white-space: nowrap;
     }
   }
 
-  .categories {
+  .controls {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 
-    a {
-      margin: $size-5;
+    .categories {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      a {
+        margin: $size-5;
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          margin: $size-3;
+        }
+      }
+    }
+
+    .auth {
+      display: flex;
+      flex-direction: row;
+      
+      .username {
+        font-weight: bold;
+      }
+
+      .username, a {
+        margin: $size-5;
+      }
     }
   }
 

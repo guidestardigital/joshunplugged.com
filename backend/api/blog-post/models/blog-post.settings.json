@@ -43,8 +43,8 @@
       "dominant": true
     },
     "blog_series": {
-      "model": "blog-series",
-      "via": "blog_posts"
+      "via": "blog_posts",
+      "model": "blog-series"
     },
     "blog_series_order": {
       "type": "integer"
@@ -71,6 +71,19 @@
     },
     "use_default_post_background": {
       "type": "boolean"
+    },
+    "comment_thread": {
+      "model": "comment-threads",
+      "via": "blog_post"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "notifications_sent": {
+      "type": "boolean"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

@@ -2,12 +2,10 @@
   <Loader :loading="loading || !blogSery">
     <div class="blog-series" v-if="!!blogSery">
       <div v-if="blogSery.image_header || blogSery.background_color"
-          class="hero blog-series-hero"
-          :style="{ 'background-color': blogSery.background_color }"
-          :data-src="blogSery.image_header ? imageBaseUri + blogSery.image_header.url : undefined"
-          uk-img>
+           class="hero blog-series-hero"
+           :style="blogPostBackgroundHeader">
       </div>
-      <div class="content">
+      <div class="layout-content">
         <div class="content-header">
           <div class="content-title-block">
             <div class="content-title">{{ blogSery.title }}</div>
@@ -53,7 +51,7 @@
         if (!this.blogSery) return undefined;
         if (!this.blogSery.blog_posts) return [];
 
-        return this.blogSery.blog_posts;
+        return this.blogSery.blog_posts.filter(bp => bp.public);
       },
       publishedAtFormatted() {
         if (!this.blogSery.published_at) {
@@ -61,7 +59,18 @@
         }
 
         return moment(this.blogSery.published_at).format('MMMM Do YYYY');
-      }
+      },
+      blogPostBackgroundHeader() {
+        if (this.blogSery.image_header) {
+          return {
+            'background-image': `url(${this.imageBaseUri + this.blogSery.image_header.url})`
+          };
+        }
+
+        return {
+          'background-color': blogSery.background_color || '#ccc'
+        };
+      },
     },
     apollo: {
       blogSery: {

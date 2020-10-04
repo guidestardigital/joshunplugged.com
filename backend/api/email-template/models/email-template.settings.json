@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "email_templates",
+  "info": {
+    "name": "Email Template"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "tag": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "body": {
+      "type": "text"
+    },
+    "template": {
+      "type": "text"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "custom_from_email": {
+      "type": "string"
+    },
+    "body_html": {
+      "type": "text"
+    }
+  }
+}

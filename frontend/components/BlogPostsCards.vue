@@ -16,22 +16,22 @@
           </div>
           <div class="text-block">
             <div v-if="blogPost.postCategory" class="uk-text-uppercase">{{ blogPost.postCategory.name }}</div>
-            <router-link :to="{ name: 'blogPosts-id', params: {id: blogPost.id} }"
-                         class="story-title">{{ blogPost.title }}</router-link>
+            <nuxt-link :to="{ name: 'blogPosts-slug', params: {slug: blogPost.slug} }"
+                         class="story-title">{{ blogPost.title }}</nuxt-link>
             <div class="date-count-block">
               <div class="date"
                   v-if="blogPost.published_at">{{ publishedAtFormatted(blogPost.published_at) }}</div>
-              <div class="count"
+              <div class="count"  
                    v-if="!!blogPost.blog_series">{{blogPost.blog_series_order}} of {{blogPost.blog_series.blog_posts.length}}
-                <router-link v-if="showSeriesLink"
-                             :to="{ name: 'blogSeries-id', params: {id: blogPost.blog_series.id} }"
-                             class="story-title">in {{blogPost.blog_series.title}}</router-link>
+                <nuxt-link v-if="showSeriesLink"
+                             :to="{ name: 'blogSeries-slug', params: {slug: blogPost.blog_series.slug} }"
+                             class="story-title">in {{blogPost.blog_series.title}}</nuxt-link>
               </div>
             </div>
             <div class="description" 
                  v-if="blogPost.show_description && blogPost.description" 
+                 v-html="$md.render(blogPost.description)"
                  :style="{ 'color': blogPost.foreground_color }">
-              {{ blogPost.description }}
             </div>
           </div>
       </div>

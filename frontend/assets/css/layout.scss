@@ -11,7 +11,43 @@
   }
 }
 
-.content {
+.chip {
+  font-size: 12px;
+  padding: $size-2;
+  margin: 0 $size-2;
+  background: $color_grey_superlight;
+  border-radius: $size-2;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.quote {
+  margin: $size-7 $size-5;
+  letter-spacing: 0.02rem;
+  padding: 0;
+  padding-left: $size-5;
+  background: transparent;
+  border-left: 1px solid $color_grey;
+  color: $color_grey_dark;
+
+  .content {
+    margin: 0;
+    font-style: italic;
+  }
+
+  .source {
+    margin-top: $size-4;
+    font-size: 11px;
+
+    text-align: right;
+  }
+}
+
+.layout-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +57,7 @@
     flex-direction: row;
     max-width: $breakpoint-mobile;
     border-bottom: 1px solid $color_grey_superlight;
+    padding-bottom: $size-8;
 
     @media only screen and (max-width: $breakpoint-mobile) {
       flex-direction: column;
@@ -30,33 +67,76 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin: $size-5;
       text-align: center;
-  
+
+      .content-super-title, .content-super-title a {
+        font-size: 18px;
+        margin: $size-5;
+        margin-bottom: 0;
+        font-family: Staatliches;
+        font-style: italic;
+      }
+
       .content-title {
         font-size: 34px;
         margin: $size-5;
         font-family: Staatliches;
       }
   
-      .content-date {
+      .content-date, .item {
         font-size: 12px;
+        margin: $size-5;
+        margin-top: 0;
       }
   
+      .content-sub-block-horizontal-wrapped {
+        margin: $size-5;
+        margin-top: 0;
+        font-size: 12px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .content-horizontal {
+        font-size: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
       .content-description {
         font-size: 14px;
         margin: $size-5;
+        margin-top: 0;
+      }
+
+      .content-title-image {
+        margin: $size-5;
+        margin-top: 0;
+        height: 300px;
+        position: relative;
+
+        img {
+          height: 100%;
+          object-fit: contain;
+        }
       }
     }
   }
 
   .content-section {
-    max-width: $breakpoint-mobile;
+    max-width: #{$breakpoint-mobile - 77px};
     margin-top: $size-8;
 
     .section-title {
       font-size: 32px;
       font-family: Staatliches;
+      margin-bottom: $size-5;
+      &.center {
+        text-align: center;
+      }
     }
 
     @media only screen and (max-width: $breakpoint-mobile) {

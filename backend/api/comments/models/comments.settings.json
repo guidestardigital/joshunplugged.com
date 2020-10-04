@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "name": "Comments"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "text": {
+      "type": "text"
+    },
+    "hidden": {
+      "type": "boolean"
+    },
+    "comment_thread": {
+      "via": "comments",
+      "model": "comment-threads"
+    },
+    "hidden_reason": {
+      "type": "text"
+    },
+    "text_uncleaned": {
+      "type": "text"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 query Posts {
   blogPosts(where: { public: true }) {
     id
+    slug
     title
     description
     published_at
@@ -15,16 +16,19 @@ query Posts {
     foreground_color
     show_description
     image_header {
+      id
       url
     }
     blog_series {
       id
+      slug
       title
       blog_posts {
         id
       }
     }
     blog_post_categories {
+      id
       name
     }
   }

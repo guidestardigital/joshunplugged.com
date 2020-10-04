@@ -1,6 +1,7 @@
 query BlogPostSeries($id: ID!) {
   blogSery(id: $id) {
     id
+    slug
     title
     description
     published_at
@@ -10,14 +11,17 @@ query BlogPostSeries($id: ID!) {
       username
     }
     image_header {
+      id
       url
     }
     blog_post_categories {
+      id
       name
     }
     blog_posts {
       id
       title
+      slug
       show_description
       description
       published_at
@@ -25,7 +29,9 @@ query BlogPostSeries($id: ID!) {
       foreground_color
       use_default_post_background
       blog_series_order
+      public
       image_header {
+        id
         url
       }
       show_in_series_only

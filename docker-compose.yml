@@ -49,7 +49,7 @@ services:
 
   blog_postgres:
     container_name: joshunplugged-postgres
-    image: postgres:latest
+    image: postgres:12
     restart: always
     ports:
       - ${POSTGRES_EXTERNAL_PORT}:5432

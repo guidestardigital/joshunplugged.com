@@ -4,7 +4,7 @@ query Posts {
     slug
     title
     description
-    published_at
+    manually_published_at
     show_in_series_only
     use_default_post_background
     blog_series_order

@@ -1,0 +1,142 @@
+---
+version: 1.0.0
+node:
+  version: 10.16.0
+resources:
+  dns:
+    subdomains:
+    - name: api
+      value: api
+    - name: www
+      value: www
+  api:
+    mailgun:
+      secrets:
+      - apiKey
+    deepAi:
+      secrets:
+        - apiKey
+  healthcheck:
+    urls:
+    - name: Strapi
+      subdomain: api
+      type: 'http-default'
+    - name: Web
+      subdomain: www
+      type: 'http-default'
+  containerRepository:
+    containers:
+    - name: backend-container
+      path: backend
+      ports:
+      - name: Strapi.js
+        value: 1337
+        type: web
+      routes:
+      - type: host
+        value: "{{{dns.api}}}"
+      description: Strapi backend
+      envVariables:
+        POSTGRES_HOST: "{{{database.pg-main.host}}}"
+        POSTGRES_USER: "{{{database.pg-main.user}}}"
+        POSTGRES_PORT: "{{{database.pg-main.port}}}"
+        POSTGRES_PASSWORD: "{{{database.pg-main.password}}}"
+        POSTGRES_DB: "{{{database.pg-main.name}}}"
+        ADMIN_JWT_SECRET: "{{{password.jwt-pw.value}}}"
+        API_DOMAIN: "{{{templateEnvVariables.apiUrl}}}"
+        CORS_ORIGIN_ALLOWED: "{{{templateEnvVariables.cors}}}"
+        AWS_ACCESS_KEY_ID: "{{{account.aws.accessKeyId}}}"
+        AWS_ACCESS_SECRET: "{{{account.aws.accessSecret}}}"
+        AWS_S3_REGION: "{{{blobStorage.strapi-images.region}}}"
+        AWS_S3_BUCKET: "{{{blobStorage.strapi-images.bucket}}}"
+        NODE_ENV: "{{{environment.name}}}"
+        MAILGUN_API_KEY: "{{{api.mailgun.apiKey}}}"
+        DEEP_AI_API_KEY: "{{{api.deepAi.apiKey}}}"
+        MAILGUN_DOMAIN: mail.joshunplugged.com
+        MASTER_EMAIL: joshua.p.jung@gmail.com
+        NO_REPLY_EMAIL: no-reply@joshunplugged.com
+    - name: frontend-container
+      path: frontend
+      ports:
+      - name: Nuxt.js
+        type: web
+        value: 3000
+      routes:
+      - type: host
+        value: "{{{dns.root}}}"
+      - type: host
+        value: "{{{dns.www}}}"
+      description: Nuxt frontend
+      envVariables:
+        NODE_ENV: "{{{environment.name}}}"
+        API_DOMAIN: "{{{templateEnvVariables.apiUrl}}}"
+        BUILD_VERSION: "{{{deploy.root.rootRepositoryVersion}}}"
+  database:
+    databases:
+    - name: pg-main
+      type: postgres
+      user: admin
+      deployment: docker-same-instance
+      version: 12
+      port: 5432
+      passwordName: postgres-pw
+  password:
+    passwords:
+    - name: jwt-pw
+      type: word
+      bytes: 8
+    - name: postgres-pw
+      type: word
+      bytes: 4
+  blobStorage:
+    blobs:
+    - name: strapi-images
+templateEnvVariables:
+  production:
+    cors: 'https://{{{dns.api}}},https://{{{dns.www}}},https://{{{dns.root}}}'
+    apiUrl: 'https://{{{dns.api}}}'
+    nodeEnv: production
+  staging:
+    cors: 'https://{{{dns.api}}},https://{{{dns.www}}},https://{{{dns.root}}}'
+    apiUrl: 'https://{{{dns.api}}}'
+    nodeEnv: development
+  local:
+    cors: http://localhost:3000,http://localhost:1337
+    apiUrl: http://localhost:1337
+    nodeEnv: development
+scripts:
+  template:
+    initial:
+      steps:
+      - name: Replace Repo Variables
+        action: replace-repo-variables
+  setup:
+    local:
+      steps:
+      - name: Build Local Env
+        action: replace-repo-env-variables
+        files: [{ from: '.env.template', to: '.env' }]
+  build:
+    all:
+      steps:
+      - name: Build Nuxt Frontend
+        action: build-docker
+        workingDir: frontend
+        dockerFile: Dockerfile
+        container: frontend-container
+      - name: Build Strapi Backend
+        action: build-docker
+        workingDir: backend
+        dockerFile: Dockerfile
+        container: backend-container
+  deploy:
+    all:
+      steps:
+      - name: Deploy Setup Environment
+        action: deploy-setup-environment
+      - name: Routing Setup
+        action: deploy-routing-setup
+      - name: Pull Docker Container
+        action: deploy-pull-docker-containers
+      - name: Docker Compose Up
+        action: deploy-docker-compose-up

@@ -3,11 +3,13 @@
   "connection": "default",
   "collectionName": "blog_posts",
   "info": {
-    "name": "Blog Post"
+    "name": "Blog Post",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -18,7 +20,7 @@
       "collection": "user",
       "via": "blogPost"
     },
-    "published_at": {
+    "manually_published_at": {
       "type": "datetime"
     },
     "public": {

@@ -5,7 +5,7 @@ query BookReview($slug: String!) {
     content
     opinion
     rating
-    published_at
+    manually_published_at
     book_published_date
     slug
     topics

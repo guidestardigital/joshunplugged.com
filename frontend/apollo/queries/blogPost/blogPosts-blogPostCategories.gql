@@ -7,7 +7,7 @@ query Category($id: ID!){
       id
       slug
       title
-      published_at
+      manually_published_at
       background_color
       foreground_color
       description

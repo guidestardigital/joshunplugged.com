@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "comment_threads",
   "info": {
-    "name": "Comment Threads"
+    "name": "Comment Threads",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "topic": {

@@ -4,7 +4,7 @@ query BlogPostSeries($id: ID!) {
     slug
     title
     description
-    published_at
+    manually_published_at
     background_color
     authors {
       id
@@ -24,7 +24,7 @@ query BlogPostSeries($id: ID!) {
       slug
       show_description
       description
-      published_at
+      manually_published_at
       background_color
       foreground_color
       use_default_post_background

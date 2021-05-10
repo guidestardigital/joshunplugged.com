@@ -3,11 +3,13 @@
   "connection": "default",
   "collectionName": "email_templates",
   "info": {
-    "name": "Email Template"
+    "name": "Email Template",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "tag": {

@@ -3,11 +3,13 @@
   "connection": "default",
   "collectionName": "blog_post_categories",
   "info": {
-    "name": "Blog Post Category"
+    "name": "Blog Post Category",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "name": {

@@ -3,11 +3,13 @@
   "connection": "default",
   "collectionName": "links",
   "info": {
-    "name": "Link"
+    "name": "Link",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "description": {

@@ -14,7 +14,7 @@
                         class="story-title">{{ bookReview.title }}</nuxt-link>
           <div class="date-count-block">
             <div class="date"
-                  v-if="bookReview.published_at">Reviewed {{ publishedAtFormatted(bookReview.published_at) }}</div>
+                  v-if="bookReview.manually_published_at">Reviewed {{ publishedAtFormatted(bookReview.manually_published_at) }}</div>
           </div>
           <div class="sub-block-horizontal"
                 v-if="bookReview.authors && bookReview.authors.filter(a => a.public).length">
@@ -57,13 +57,13 @@
     computed: {
       bookReviewsSorted() {
         return this.bookReviews.sort((a, b) => {
-          if (a.published_at && b.published_at) {
-            if (a.published_at === b.published_at) {
+          if (a.manually_published_at && b.manually_published_at) {
+            if (a.manually_published_at === b.manually_published_at) {
               return a.title < b.title ? 1 : -1;
             }
 
-            return new Date(a.published_at).getTime() > new Date(b.published_at).getTime() ? -1 : 1;
-          } else if (a.published_at) {
+            return new Date(a.manually_published_at).getTime() > new Date(b.manually_published_at).getTime() ? -1 : 1;
+          } else if (a.manually_published_at) {
             return 1;
           }
           return -1;

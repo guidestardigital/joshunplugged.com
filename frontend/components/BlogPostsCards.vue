@@ -20,7 +20,7 @@
                          class="story-title">{{ blogPost.title }}</nuxt-link>
             <div class="date-count-block">
               <div class="date"
-                  v-if="blogPost.published_at">{{ publishedAtFormatted(blogPost.published_at) }}</div>
+                  v-if="blogPost.manually_published_at">{{ publishedAtFormatted(blogPost.manually_published_at) }}</div>
               <div class="count"  
                    v-if="!!blogPost.blog_series">{{blogPost.blog_series_order}} of {{blogPost.blog_series.blog_posts.length}}
                 <nuxt-link v-if="showSeriesLink"
@@ -63,13 +63,13 @@
       blogPostsSorted() {
         if (this.sortKey === 'published_at') {
           return this.blogPosts.sort((a, b) => {
-            if (a.published_at && b.published_at) {
-              if (a.published_at === b.published_at) {
+            if (a.manually_published_at && b.manually_published_at) {
+              if (a.manually_published_at === b.manually_published_at) {
                 return a.blog_series_order < b.blog_series_order ? 1 : -1;
               }
 
-              return new Date(a.published_at).getTime() > new Date(b.published_at).getTime() ? -1 : 1;
-            } else if (a.published_at) {
+              return new Date(a.manually_published_at).getTime() > new Date(b.manually_published_at).getTime() ? -1 : 1;
+            } else if (a.manually_published_at) {
               return 1;
             }
             return -1;
@@ -94,7 +94,7 @@
     },
     apollo: {
       images: {
-        prefetch: true,
+        prefetch: false,
         query: imagesQuery,
         variables() {
           return { target: 'default_blog_post_background' };

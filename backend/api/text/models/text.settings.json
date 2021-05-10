@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "texts",
   "info": {
-    "name": "Text"
+    "name": "Text",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "text": {

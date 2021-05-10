@@ -35,8 +35,8 @@
       this.onResize();
 
       // Setup Apollo Login JWT token, on startup
-      if (this.$auth.getToken('local')) {
-        this.$apolloHelpers.onLogin(this.$auth.getToken('local').replace('Bearer ', ''));
+      if (this.$auth.strategy.token.get()) {
+        this.$apolloHelpers.onLogin(this.$auth.strategy.token.get().replace('Bearer ', ''));
       }
     },
     beforeDestroy() {
@@ -48,7 +48,7 @@
     },
     apollo: {
       blogPostCategories: {
-        prefetch: true,
+        prefetch: false,
         query: blogPostCategoriesQuery
       }
     }

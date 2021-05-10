@@ -4,7 +4,7 @@ query BookReviews {
     title
     description
     rating
-    published_at
+    manually_published_at
     book_published_date
     slug
     topics

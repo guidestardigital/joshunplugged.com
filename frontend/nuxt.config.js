@@ -1,44 +1,39 @@
+const { FALSE } = require('node-sass');
+
 var envPath = require('find-config')('.env', { module: true });
 
 require('dotenv').config({ path: envPath });
 
 console.log('-----------------------------------------------------------------');
 console.log(`Loading from ${envPath}:`)
-console.log(` IMAGE_BASE_URI: ${process.env.IMAGE_BASE_URI}`)
-console.log(` BLOG_API_BASE: ${process.env.BLOG_API_BASE}`)
+console.log(` API_DOMAIN: ${process.env.API_DOMAIN}`)
+console.log(` API_DOMAIN_NUXT_OVERRIDE: ${process.env.API_DOMAIN_NUXT_OVERRIDE}`)
+console.log(` BUILD_VERSION: ${process.env.BUILD_VERSION}`)
 console.log('-----------------------------------------------------------------');
 
 module.exports = {
-  mode: 'universal',
-  env: {
-    IMAGE_BASE_URI: process.env.IMAGE_BASE_URI || '',
-    BLOG_API_BASE: process.env.BLOG_API_BASE || 'BLOG_API_BASE',
-    BLOG_TITLE: process.env.BLOG_TITLE || 'BLOG_TITLE'
+  telemetry: false,
+  server: {
+    host: "0.0.0.0"
   },
   /*
   ** Headers of the page
   */
   head: {
-    title: process.env.BLOG_TITLE,
+    title: 'Josh Unplugged',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
-      { hid: 'og:title', name: 'og:title', content: process.env.BLOG_TITLE },
+      { hid: 'og:title', name: 'og:title', content: 'Josh Unplugged'},
       { hid: 'og:image', name: 'og:image', content: 'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg' },
-      { hid: 'og:image', name: 'og:description', content: process.env.BLOG_DESCRIPTION },
-      { hid: 'og:image', name: 'og:url', content: 'https://www.' + process.env.BLOG_DOMAIN },
+      { hid: 'og:image', name: 'og:description', content: 'Life, Paranormal, Politics, and Theology. All in one place.' },
+      { hid: 'og:image', name: 'og:url', content: 'https://www.joshunplugged.com' },
     ],
     script: [
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js'},
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/components/prism-css.min.js'},
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/components/prism-javascript.min.js'},
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/components/prism-c.min.js'},
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/components/prism-markup.min.js'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css'}
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   link: [
@@ -63,38 +58,47 @@ module.exports = {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/bulma',
     '@nuxtjs/axios',
+    '@nuxtjs/bulma',
     '@nuxtjs/dotenv',
     '@nuxtjs/apollo',
     '@nuxtjs/markdownit',
-    '@nuxtjs/auth',
-    '@nuxtjs/proxy'
+    '@nuxtjs/auth-next'
   ],
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/'
+    },
     strategies: {
       local: {
         endpoints: {
           login: {
             url: '/auth/local',
-            method: 'post',
-            propertyName: 'jwt'
+            method: 'post'
           },
           user: {
             url: '/users/me', 
-            method: 'get', 
-            propertyName: false
+            method: 'get',
           }
         },
-        tokenName: 'Authorization',
-        tokenType: 'Bearer'
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        token: {
+          required: true,
+          name: 'Authorization',
+          type: 'Bearer',
+          property: 'jwt'
+        }
       }
     }
   },
@@ -103,15 +107,13 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.BLOG_API_BASE,
-    credentials: true
+    //credentials: true
   },
   apollo: {  
     clientConfigs: {
-      default: {
-        httpEndpoint: process.env.BLOG_API_BASE ? process.env.BLOG_API_BASE + '/graphql' : "http://localhost:1337/graphql"
-      }
-    }
+      default: '~/nuxt.config.apollo.js'
+    },
+    // errorHandler: '~/nuxt.config.apollo.errors.js'
   },
   /*
   ** Build configuration
@@ -150,6 +152,10 @@ module.exports = {
     // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
     // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
     quotes: '“”‘’',
+  },
+  publicRuntimeConfig: {
+    apiDomain: process.env.API_DOMAIN,
+    buildVersion: process.env.BUILD_VERSION || 'development'
   },
   router: {
     scrollBehavior(to, from, savedPosition) {

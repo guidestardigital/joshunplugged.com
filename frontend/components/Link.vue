@@ -21,7 +21,7 @@
     },
     apollo: {
       link: {
-        prefetch: true,
+        prefetch: false,
         query: linkQuery,
         variables() {
           return { id: this.id };

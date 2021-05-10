@@ -1,0 +1,11 @@
+@import '../assets/css/variables.scss';
+
+.footer {
+  background-color: $color_theme_3;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $color_white;
+}

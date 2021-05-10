@@ -21,7 +21,7 @@
     },
     apollo: {
       links: {
-        prefetch: true,
+        prefetch: false,
         query: linksQuery,
         variables() {
           return { key: this.linkKey };

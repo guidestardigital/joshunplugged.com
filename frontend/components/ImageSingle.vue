@@ -20,7 +20,7 @@
     },
     apollo: {
       images: {
-        prefetch: true,
+        prefetch: false,
         query: imagesQuery,
         variables() {
           return { target: this.target };

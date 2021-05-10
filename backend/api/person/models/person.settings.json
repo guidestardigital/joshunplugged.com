@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "people",
   "info": {
-    "name": "Person"
+    "name": "Person",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "first_name": {

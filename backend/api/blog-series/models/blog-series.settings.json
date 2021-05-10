@@ -3,11 +3,13 @@
   "connection": "default",
   "collectionName": "blog_series",
   "info": {
-    "name": "Blog Series"
+    "name": "Blog Series",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -34,7 +36,7 @@
     "public": {
       "type": "boolean"
     },
-    "published_at": {
+    "manually_published_at": {
       "type": "datetime"
     },
     "authors": {

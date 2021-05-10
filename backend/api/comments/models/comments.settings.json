@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "comments",
   "info": {
-    "name": "Comments"
+    "name": "Comments",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "user": {

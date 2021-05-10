@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "book_reviews",
   "info": {
-    "name": "Book Review"
+    "name": "Book Review",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -50,7 +52,7 @@
     "slug": {
       "type": "string"
     },
-    "published_at": {
+    "manually_published_at": {
       "type": "datetime"
     },
     "comment_thread": {

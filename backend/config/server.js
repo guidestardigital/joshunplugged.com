@@ -1,14 +1,12 @@
 module.exports = ({ env }) => {
-  console.log('Initializing server.js...')
-  Object.keys(process.env).filter(k => !k.startsWith('npm')).sort().forEach(k => {
-    console.log(`${k} = ${process.env[k]}`);
-  });
-  console.log();
+  console.log('API_DOMAIN', env('API_DOMAIN'));
+  console.log('NODE_ENV', env('NODE_ENV'));
+
   return {
     host: `0.0.0.0`,
-    url: 'https://' + env('BLOG_API_DOMAIN'),
+    url: env('API_DOMAIN'),
     port: 1337,
-    production: env('NODE_ENV') === 'production',
+    production: env('NODE_ENV'),
     proxy: {
       enabled: false
     },

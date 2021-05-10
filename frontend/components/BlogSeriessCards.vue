@@ -14,7 +14,7 @@
         <nuxt-link class="story-title" :to="{ name: 'blogSeries-id', params: {id: blogSeries.id} }">{{ blogSeries.title }}</nuxt-link>
         <div class="date-count-block">
           <div class="date" 
-               v-if="blogSeries.published_at">{{ publishedAtFormatted(blogSeries.published_at) }}</div>
+               v-if="blogSeries.manually_published_at">{{ publishedAtFormatted(blogSeries.manually_published_at) }}</div>
           <div class="count">{{blogSeries.blog_posts.length}} Part Series</div>
         </div>
         <div class="description"

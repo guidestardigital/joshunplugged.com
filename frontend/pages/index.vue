@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import Footer from "~/layouts/Footer";
-
 import blogPostsQuery from '~/apollo/queries/blogPost/blogPosts'
 import blogSeriessQuery from '~/apollo/queries/blogSeries/blogSeriess'
 import bookReviewsQuery from '~/apollo/queries/bookReview/bookReviews'
@@ -49,15 +47,15 @@ export default {
   },
   apollo: {
     blogPosts: {
-      prefetch: true,
+      prefetch: false,
       query: blogPostsQuery
     },
     blogSeries: {
-      prefetch: true,
+      prefetch: false,
       query: blogSeriessQuery
     },
     bookReviews: {
-      prefetch: true,
+      prefetch: false,
       query: bookReviewsQuery
     }
   },

@@ -167,11 +167,11 @@
         return this.thisBlogSeriesBlogPosts[this.thisBlogSeriesPostIndex - 1];
       },
       publishedAtFormatted() {
-        if (!this.blogPost.published_at) {
+        if (!this.blogPost.manually_published_at) {
           return '';
         }
 
-        return moment(this.blogPost.published_at).format('MMMM Do YYYY');
+        return moment(this.blogPost.manually_published_at).format('MMMM Do YYYY');
       }
     },
     apollo: {

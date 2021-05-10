@@ -21,7 +21,7 @@
     },
     apollo: {
       text: {
-        prefetch: true,
+        prefetch: false,
         query: textQuery,
         manual: true,
         variables() {

@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "medias",
   "info": {
-    "name": "Medias"
+    "name": "Medias",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "description": {

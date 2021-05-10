@@ -54,11 +54,11 @@
         return this.blogSery.blog_posts.filter(bp => bp.public);
       },
       publishedAtFormatted() {
-        if (!this.blogSery.published_at) {
+        if (!this.blogSery.manually_published_at) {
           return '';
         }
 
-        return moment(this.blogSery.published_at).format('MMMM Do YYYY');
+        return moment(this.blogSery.manually_published_at).format('MMMM Do YYYY');
       },
       blogPostBackgroundHeader() {
         if (this.blogSery.image_header) {

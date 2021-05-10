@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "notifications",
   "info": {
-    "name": "Notifications"
+    "name": "Notifications",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "to_user": {

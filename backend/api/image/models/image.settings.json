@@ -3,7 +3,8 @@
   "connection": "default",
   "collectionName": "images",
   "info": {
-    "name": "image"
+    "name": "image",
+    "description": ""
   },
   "options": {
     "increments": true,

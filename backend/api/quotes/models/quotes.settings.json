@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "quotes",
   "info": {
-    "name": "Quotes"
+    "name": "Quotes",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "content": {

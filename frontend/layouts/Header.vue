@@ -49,7 +49,7 @@
     },
     apollo: {
       blogPostCategories: {
-        prefetch: true,
+        prefetch: false,
         query: blogPostCategoriesQuery
       }
     }

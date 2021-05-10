@@ -20,7 +20,7 @@ module.exports = ({ env }) => {
         maxAge: 86400000
       },
       cors: {
-        enabled: true,
+        enabled: process.env.NODE_ENV !== 'development',
         origin: env('CORS_ORIGIN_ALLOWED')
       },
     }

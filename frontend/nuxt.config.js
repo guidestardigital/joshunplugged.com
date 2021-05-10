@@ -64,7 +64,6 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/bulma',
     '@nuxtjs/dotenv',
     '@nuxtjs/apollo',
     '@nuxtjs/markdownit',

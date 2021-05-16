@@ -1,92 +1,88 @@
 <template>
-  <Loader :loading="loading || !blogPost">
-    <div class="blog-post" v-if="blogPost">
-      <div v-if="blogPost.image_header || blogPost.background_color"
-          class="hero blog-post-hero"
-          :style="blogPostBackgroundHeader" />
+  <div class="page blog-post" v-if="blogPost">
+    <div v-if="blogPost.image_header || blogPost.background_color"
+        class="hero blog-post-hero"
+        :style="blogPostBackgroundHeader" />
 
-      <div class="layout-content blog-body" id="top">
-        <div class="content-header">
-          <div class="blog-series-information"
+    <div class="contents blog-body" id="top">
+      <div class="header">
+        <div class="blog-series-information"
+            v-if="!!thisBlogSeries">
+          <div class="series-intro">Part {{ blogPost.blog_series_order }} of Series</div>
+          <div class="blog-series-title">
+            <nuxt-link :to="{ name: 'series-slug', params: {slug: thisBlogSeries.slug} }">
+              {{ thisBlogSeries.title }}
+            </nuxt-link>
+          </div>
+          <div class="blog-series-navigation"
               v-if="!!thisBlogSeries">
-            <div class="series-intro">Part {{ blogPost.blog_series_order }} of Series</div> 
-            <div class="blog-series-title">
-              <nuxt-link class="uk-link" :to="{ name: 'blogSeries-slug', params: {slug: thisBlogSeries.slug} }">
-                {{ thisBlogSeries.title }}
+            <div v-for="bp in thisBlogSeriesBlogPosts"
+                :key="bp.id">
+              <nuxt-link :class="{ 'selected': bp.id === blogPost.id}"
+                          :to="{ name: 'posts-slug', params: {slug: bp.slug}, hash: '#top' }">
+                {{ bp.title }}
               </nuxt-link>
             </div>
-            <div class="blog-series-navigation"
-                v-if="!!thisBlogSeries">
-              <div v-for="bp in thisBlogSeriesBlogPosts"
-                  :key="bp.id">
-                <nuxt-link :class="{ 'uk-link': true, 'selected': bp.id == blogPost.id}" 
-                            :to="{ name: 'blogPosts-slug', params: {slug: bp.slug}, hash: '#top' }">
-                  {{ bp.title }}
-                </nuxt-link>
-              </div>
-            </div>
           </div>
-          <div class="content-title-block">
-            <div class="content-title">{{ blogPost.title }}</div>
-            <div class="content-date" v-if="publishedAtFormatted">{{ publishedAtFormatted }} by Joshua Jung</div>
-            <div class="content-description"
-                v-if="!!blogPost.description"
-                v-html="$md.render(blogPost.description)"/>
+        </div>
+        <div class="content-title-block">
+          <div class="content-title">{{ blogPost.title }}</div>
+          <div class="content-date" v-if="publishedAtFormatted">{{ publishedAtFormatted }} by Joshua Jung</div>
+          <div class="content-description"
+              v-if="!!blogPost.description"
+              v-html="$md.render(blogPost.description)"/>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div v-if="blogPost.content"
+              class="blog-markdown-content"
+              v-html="$md.render(blogPost.content)"></div>
+      </div>
+
+      <div class="content-section" id="comments">
+        <!-- Next and Previous -->
+        <div class="blog-post-series-next-prev"
+            v-if="!!thisBlogSeries">
+          <div class="vertical-description-link" v-if="prevPostInSeries">
+            <div class="description">Previous</div>
+            <nuxt-link :to="{ name: 'posts-slug', params: {slug: prevPostInSeries.slug}, hash: '#top' }">
+              {{ prevPostInSeries.title }}
+            </nuxt-link>
+          </div>
+          <div class="vertical-description-link" v-if="nextPostInSeries">
+            <div class="description">Next</div>
+            <nuxt-link :to="{ name: 'posts-slug', params: {slug: nextPostInSeries.slug}, hash: '#top' }">
+              {{ nextPostInSeries.title }}
+            </nuxt-link>
           </div>
         </div>
 
-        <div class="content-section">
-          <div v-if="blogPost.content" 
-                class="blog-markdown-content"
-                v-html="$md.render(blogPost.content)"></div>
-        </div>
+        <!-- Comment Thread -->
+        <CommentThread :threadId="blogPost.comment_thread ? blogPost.comment_thread.id : '-1'"
+                      :key="commentThreadKey"
+                      @replyCreated="commentThread_replyCreated" />
 
-        <div class="content-section" id="comments">
-          <!-- Next and Previous -->
-          <div class="blog-post-series-next-prev"
-              v-if="!!thisBlogSeries">
-            <div class="vertical-description-link" v-if="prevPostInSeries">
-              <div class="description">Previous</div>
-              <nuxt-link class="uk-link"
-                          :to="{ name: 'blogPosts-slug', params: {slug: prevPostInSeries.slug}, hash: '#top' }">
-                {{ prevPostInSeries.title }}
-              </nuxt-link>
-            </div>
-            <div class="vertical-description-link" v-if="nextPostInSeries">
-              <div class="description">Next</div>
-              <nuxt-link class="uk-link"
-                            :to="{ name: 'blogPosts-slug', params: {slug: nextPostInSeries.slug}, hash: '#top' }">
-                {{ nextPostInSeries.title }}
-              </nuxt-link>
-            </div>
-          </div>
-
-          <!-- Comment Thread -->
-          <CommentThread :threadId="blogPost.comment_thread ? blogPost.comment_thread.id : '-1'"
-                        :key="commentThreadKey"
-                        @replyCreated="commentThread_replyCreated" />
-
-          <!-- Recommended Links -->
-          <div class="uk-container uk-container-medium blog-post-footer" v-if="blogPost.links && blogPost.links.length">
-            <h3>My Recommended Links</h3>
-            <div class="related-links">
-              <Link :id="link.id" v-for="link in blogPost.links" :key="link.id" />
-            </div>
+        <!-- Recommended Links -->
+        <div class="uk-container uk-container-medium blog-post-footer" v-if="blogPost.links && blogPost.links.length">
+          <h3>My Recommended Links</h3>
+          <div class="related-links">
+            <Link :id="link.id" v-for="link in blogPost.links" :key="link.id" />
           </div>
         </div>
       </div>
     </div>
-  </Loader>
+  </div>
 </template>
 
 <script>
   import blogPostQuery from "~/apollo/queries/blogPost/blogPost";
   import { createComment } from "~/util/comments";
-  
-  import Loader from "~/components/Loader";
+
   import Link from "~/components/Link";
   import blogSeriessQuery from '~/apollo/queries/blogSeries/blogSeriess'
   import CommentThread from '~/components/CommentThread';
+  import './_slug.scss';
 
   const moment = require("moment");
 
@@ -103,7 +99,6 @@
     },
     components: {
       Link,
-      Loader,
       CommentThread
     },
     computed: {
@@ -116,9 +111,9 @@
     methods: {
       commentThread_replyCreated(reply) {
         createComment(this.$apollo, {
-          userId: this.$auth.user.id, 
-          commentText: reply.replyText, 
-          commentThread: reply.commentThread, 
+          userId: this.$auth.user.id,
+          commentText: reply.replyText,
+          commentThread: reply.commentThread,
           linkToBlogPostId: this.blogPost.id
         }).then(commentThread => {
           this.blogPost.comment_thread = commentThread;
@@ -141,8 +136,8 @@
           'background-color': blogPost.background_color || '#ccc'
         };
       },
-      blogPostId() {
-        return parseInt(this.$route.params.id);
+      blogPostSlug() {
+        return this.$route.params.slug;
       },
       thisBlogSeriesBlogPosts() {
         if (this.cachedSortedBlogPosts) return this.cachedSortedBlogPosts;
@@ -153,10 +148,10 @@
         return this.cachedSortedBlogPosts = this.thisBlogSeries.blog_posts.sort(sortFunction);
       },
       thisBlogSeries() {
-        return this.blogSeries.find(blogSery => blogSery.blog_posts.find(blogPost => blogPost.id == this.blogPostId ));
+        return this.blogSeries.find(blogSery => blogSery.blog_posts.find(blogPost => blogPost.slug === this.blogPostSlug ));
       },
       thisBlogSeriesPostIndex() {
-        return this.thisBlogSeriesBlogPosts.findIndex(blogPost => blogPost.id == this.blogPostId);
+        return this.thisBlogSeriesBlogPosts.findIndex(blogPost => blogPost.slug === this.blogPostSlug);
       },
       nextPostInSeries() {
         if (this.thisBlogSeriesPostIndex === this.thisBlogSeriesBlogPosts.length - 1) return undefined;

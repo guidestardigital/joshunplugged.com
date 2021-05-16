@@ -1,6 +1,7 @@
-query Category($id: ID!){
-  blogPostCategory(id: $id) {
+query Category($slug: String!){
+  blogPostCategories(where: {slug:$slug}) {
     id
+    slug
     name
     description
     blog_posts {

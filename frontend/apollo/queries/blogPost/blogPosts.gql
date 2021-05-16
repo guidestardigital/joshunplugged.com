@@ -29,6 +29,7 @@ query Posts {
     }
     blog_post_categories {
       id
+      slug
       name
     }
   }

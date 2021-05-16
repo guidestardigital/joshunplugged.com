@@ -1,10 +1,10 @@
 <template>
   <Loader :loading="loading || !bookReview">
-    <div class="book-review" v-if="bookReview">
-      <div class="layout-content" id="top">
-        <div class="content-header">
+    <div class="page book-review" v-if="bookReview">
+      <div class="contents" id="top">
+        <div class="header">
           <div class="content-title-block">
-            <div class="content-super-title"><nuxt-link :to="{ name: 'bookReviews'}">Book Review</nuxt-link></div>
+            <div class="content-super-title"><nuxt-link :to="{ name: 'books'}">Book Review</nuxt-link></div>
             <div class="content-title">{{ bookReview.title }}</div>
             <div class="content-sub-block-horizontal-wrapped">
               <div class="content-horizontal item">
@@ -67,7 +67,7 @@
 
 <script>
   import bookReviewQuery from "~/apollo/queries/bookReview/bookReview";
-  
+
   import Quote from "~/components/Quote";
   import Link from "~/components/Link";
   import Rating from "~/components/Rating";
@@ -94,9 +94,9 @@
     methods: {
       commentThread_replyCreated(reply) {
         createComment(this.$apollo, {
-          userId: this.$auth.user.id, 
-          commentText: reply.replyText, 
-          commentThread: reply.commentThread, 
+          userId: this.$auth.user.id,
+          commentText: reply.replyText,
+          commentThread: reply.commentThread,
           linkToBookReviewId: this.bookReview.id
         }).then(commentThread => {
           this.bookReview.comment_thread = commentThread;

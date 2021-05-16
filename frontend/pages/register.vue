@@ -1,37 +1,39 @@
 <template>
-  <div class="registration-page layout-content">
-    <div class="content-header">
-      <div class="content-title-block">
-        <div class="content-title">Register</div>
-        <div class="content-description">Become a user to comment on posts, receive emails on comment replies, and receive updates when new content is added.</div>
+  <div class="page">
+    <div class="registration-page contents">
+      <div class="header">
+        <div class="content-title-block">
+          <div class="content-title">Register</div>
+          <div class="content-description">Become a user to comment on posts, receive emails on comment replies, and receive updates when new content is added.</div>
+        </div>
       </div>
-    </div>
-    <div class="content-section">
-      <form v-on:submit.prevent="register" 
-            class="form">
-        <div v-if="sending">
-          Sending registration...
-        </div>
-        <div v-else-if="success" class="form-confirmation">
-          You have been registered as <span class="username">{{user.username}}</span>.
-          Please check your email at <span class="email">{{user.email}}</span> to confirm your registration.
-        </div>
-        Email
-        <input id="email" />
-        Username
-        <input id="username" />
-        First Name
-        <input id="firstName" placeholder="Optional" />
-        Last Name
-        <input id="lastName" placeholder="Optional" />
-        Password
-        <input id="password" type="password" />
-        <TextByTag tag="signup_notice" class="notice" />
-        <button type="submit">Signup</button>
-        <div v-if="error" class="form-error">
-          {{ error }}
-        </div>
-      </form>
+      <div class="content-section">
+        <form v-on:submit.prevent="register"
+              class="form">
+          <div v-if="sending">
+            Sending registration...
+          </div>
+          <div v-else-if="success" class="form-confirmation">
+            You have been registered as <span class="username">{{user.username}}</span>.
+            Please check your email at <span class="email">{{user.email}}</span> to confirm your registration.
+          </div>
+          Email
+          <input id="email" />
+          Username
+          <input id="username" />
+          First Name
+          <input id="firstName" placeholder="Optional" />
+          Last Name
+          <input id="lastName" placeholder="Optional" />
+          Password
+          <input id="password" type="password" />
+          <TextByTag tag="signup_notice" class="notice" />
+          <button type="submit">Signup</button>
+          <div v-if="error" class="form-error">
+            {{ error }}
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -42,7 +44,7 @@
   export default {
     data() {
       return {
-        sending: false, 
+        sending: false,
         success: false,
         error: undefined
       };
@@ -80,10 +82,10 @@
         })
         .then(response => {
           if (!response) return;
-          
+
           if (response.message) {
             let message = "An error occurred registering. Please try again later.";
-            
+
             message = response.message.map(m => m.messages.map(m2 => m2.message).join('\n')).join('\n');
 
             this.error = message;

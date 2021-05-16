@@ -1,0 +1,129 @@
+@import '../styles/variables.scss';
+
+.page {
+  > .hero {
+    min-height: 47vh;
+    position: relative;
+    background-position: 50% 100%;
+    background-size: cover;
+    overflow: hidden;
+
+    object {
+      max-height: 47vh;
+    }
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+      padding-bottom: $size-5;
+      padding-top: $size-6;
+    }
+  }
+
+  > .contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100vw;
+
+    > .header {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid $color_grey_superlight;
+      padding: $size-8;
+      max-width: 100vw;
+
+      @media only screen and (max-width: $breakpoint-mobile) {
+        flex-direction: column;
+        padding: $size-8 0;
+      }
+
+      .content-title-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        .content-super-title, .content-super-title a {
+          font-size: 18px;
+          margin: $size-5;
+          margin-bottom: 0;
+          font-family: 'Montserrat', sans-serif;
+          font-style: italic;
+        }
+
+        .content-title {
+          font-size: 34px;
+          margin: $size-5;
+          line-height: 3rem;
+          font-family: 'Montserrat', sans-serif;
+        }
+
+        .content-date, .item {
+          font-size: 12px;
+          margin: $size-5;
+          margin-top: 0;
+        }
+
+        .content-sub-block-horizontal-wrapped {
+          margin: $size-5;
+          margin-top: 0;
+          font-size: 12px;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .content-horizontal {
+          font-size: 12px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .content-description {
+          font-size: 14px;
+          margin: $size-5;
+          margin-top: 0;
+        }
+
+        .content-title-image {
+          margin: $size-5;
+          margin-top: 0;
+          height: 300px;
+          position: relative;
+          overflow: hidden;
+
+          img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+
+    .content-section {
+      max-width: #{$breakpoint-mobile - 77px};
+      margin-top: $size-8;
+
+      .section-title {
+        font-size: 32px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 2rem;
+        margin-bottom: $size-5;
+
+        &.center {
+          text-align: center;
+        }
+      }
+
+      @media only screen and (max-width: $breakpoint-mobile) {
+        margin: $size-6;
+      }
+    }
+
+    .content-section:last-child {
+      margin-bottom: $size-8;
+    }
+  }
+}

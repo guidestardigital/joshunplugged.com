@@ -25,6 +25,9 @@
     "blog_series": {
       "via": "blog_post_categories",
       "collection": "blog-series"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }

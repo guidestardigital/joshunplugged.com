@@ -23,15 +23,16 @@
       "via": "blog_series"
     },
     "blog_post_categories": {
-      "collection": "blog-post-category",
       "via": "blog_series",
+      "collection": "blog-post-category",
       "dominant": true
     },
     "image_header": {
       "model": "file",
       "via": "related",
       "plugin": "upload",
-      "required": false
+      "required": false,
+      "pluginOptions": {}
     },
     "public": {
       "type": "boolean"
@@ -50,6 +51,9 @@
     },
     "slug": {
       "type": "string"
+    },
+    "show_star_svg": {
+      "type": "boolean"
     }
   }
 }

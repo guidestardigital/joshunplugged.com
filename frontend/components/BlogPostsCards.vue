@@ -1,35 +1,28 @@
 <template>
-  <div class="story-cards-container">
+  <div class="blog-post-cards">
     <div v-for="blogPost in blogPostsSorted"
          :style="{'background-color': blogPost.background_color}"
          :key="blogPost.id">
       <div class="story-card">
           <div class="image-container">
-            <img :src="imageBaseUri + images[0].image.url" 
-                 alt="Default background" 
-                 class="image"
-                 v-if="!blogPost.image_header && blogPost.use_default_post_background && images.length">
-            <img :src="imageBaseUri + blogPost.image_header.url" 
-                 alt="" 
-                 class="image"
-                 v-if="blogPost.image_header">
+            <image-sized :image="blogPost.image_header" size="small" />
           </div>
           <div class="text-block">
             <div v-if="blogPost.postCategory" class="uk-text-uppercase">{{ blogPost.postCategory.name }}</div>
-            <nuxt-link :to="{ name: 'blogPosts-slug', params: {slug: blogPost.slug} }"
+            <nuxt-link :to="{ name: 'posts-slug', params: {slug: blogPost.slug} }"
                          class="story-title">{{ blogPost.title }}</nuxt-link>
             <div class="date-count-block">
               <div class="date"
                   v-if="blogPost.manually_published_at">{{ publishedAtFormatted(blogPost.manually_published_at) }}</div>
-              <div class="count"  
+              <div class="count"
                    v-if="!!blogPost.blog_series">{{blogPost.blog_series_order}} of {{blogPost.blog_series.blog_posts.length}}
                 <nuxt-link v-if="showSeriesLink"
                              :to="{ name: 'blogSeries-slug', params: {slug: blogPost.blog_series.slug} }"
                              class="story-title">in {{blogPost.blog_series.title}}</nuxt-link>
               </div>
             </div>
-            <div class="description" 
-                 v-if="blogPost.show_description && blogPost.description" 
+            <div class="description"
+                 v-if="blogPost.show_description && blogPost.description"
                  v-html="$md.render(blogPost.description)"
                  :style="{ 'color': blogPost.foreground_color }">
             </div>
@@ -42,12 +35,14 @@
 <script>
   import moment from 'moment';
   import imagesQuery from "~/apollo/queries/image/images.gql";
+  import './BlogPostsCards.scss';
+  import ImageSized from '~/components/images/ImageSized';
 
   export default {
+    components: {ImageSized},
     data: function() {
       return {
-        images: [],
-        imageBaseUri: process.env.IMAGE_BASE_URI || ''
+        images: []
       }
     },
     methods: {

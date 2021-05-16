@@ -40,8 +40,8 @@
       "type": "richtext"
     },
     "blog_post_categories": {
-      "collection": "blog-post-category",
       "via": "blog_posts",
+      "collection": "blog-post-category",
       "dominant": true
     },
     "blog_series": {

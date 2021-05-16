@@ -40,12 +40,14 @@
     flex-direction: column;
     justify-content: flex-start;
     flex: 1 1 100%;
+
     min-width: 0;
 
     .story-title {
       font-size: 22px;
-      
-      font-family: Staatliches;
+      line-height: 2rem;
+
+      font-family: 'Montserrat', sans-serif;
 
       @media only screen and (max-width: $breakpoint-mobile) {
         font-size: 18px;

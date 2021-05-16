@@ -1,11 +1,11 @@
 <template>
-  <Loader :loading="loading || !blogPostCategory">
-    <div class="layout-content" 
+  <div class="page">
+    <div class="contents"
          v-if="blogPostCategory">
-      <div class="content-header">
+      <div class="header">
         <div class="content-title-block">
           <div class="content-title">{{ blogPostCategory.name }}</div>
-          <div class="content-description" 
+          <div class="content-description"
               v-if="!!blogPostCategory.description">{{ blogPostCategory.description }}</div>
         </div>
       </div>
@@ -17,33 +17,35 @@
         </div>
       </div>
     </div>
-  </Loader>
+  </div>
 </template>
 
 <script>
   import blogPostQuery from "~/apollo/queries/blogPost/blogPosts-blogPostCategories.gql";
   import BlogPostsCards from "~/components/BlogPostsCards";
-  import Loader from "~/components/Loader";
 
   export default {
     data() {
       return {
-        blogPostCategory: undefined,
+        blogPostCategories: undefined,
         loading: 0
       };
     },
     components: {
-      BlogPostsCards,
-      Loader
+      BlogPostsCards
+    },
+    computed: {
+      blogPostCategory() {
+        return this.blogPostCategories ? this.blogPostCategories[0] : undefined;
+      }
     },
     apollo: {
-      blogPostCategory: {
-        prefetch: false,
-        loadingKey: 'loading',
+      blogPostCategories: {
+        prefetch: true,
         query: blogPostQuery,
         variables() {
-          return { 
-            id: parseInt(this.$route.params.id) 
+          return {
+            slug: this.$route.params.slug
           };
         }
       }

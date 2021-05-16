@@ -1,7 +1,7 @@
 <template>
   <div class="footer-backdrop">
     <Header />
-    <div class="body" 
+    <div class="body"
          :style="{ 'margin-top': bodyMarginTop + 'px' }">
       <nuxt />
     </div>
@@ -13,6 +13,8 @@
   import blogPostCategoriesQuery from "~/apollo/queries/category/blogPostCategories";
   import Header from "~/layouts/Header";
   import Footer from "~/layouts/Footer";
+  import '~/styles/base.scss';
+  import './default.scss';
 
   export default {
     data() {

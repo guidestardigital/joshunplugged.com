@@ -27,18 +27,16 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
       { hid: 'og:title', name: 'og:title', content: 'Josh Unplugged'},
       { hid: 'og:image', name: 'og:image', content: 'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg' },
-      { hid: 'og:image', name: 'og:description', content: 'Life, Paranormal, Politics, and Theology. All in one place.' },
+      { hid: 'og:image', name: 'og:description', content: 'Christianity, Paranormal, and Theology.' },
       { hid: 'og:image', name: 'og:url', content: 'https://www.joshunplugged.com' },
     ],
-    script: [
-    ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat&family=Newsreader:wght@300;500&display=swap' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css'}
     ]
   },
-  link: [
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Staatliches' }
-  ],
   /*
   ** Customize the progress-bar color
   */
@@ -84,7 +82,7 @@ module.exports = {
             method: 'post'
           },
           user: {
-            url: '/users/me', 
+            url: '/users/me',
             method: 'get',
           }
         },
@@ -108,11 +106,11 @@ module.exports = {
   axios: {
     //credentials: true
   },
-  apollo: {  
+  apollo: {
     clientConfigs: {
       default: '~/nuxt.config.apollo.js'
     },
-    // errorHandler: '~/nuxt.config.apollo.errors.js'
+    errorHandler: '~/nuxt.config.apollo.errors.js'
   },
   /*
   ** Build configuration
@@ -141,10 +139,10 @@ module.exports = {
                                 // This is only for full CommonMark compatibility.
     breaks:       true,        // Convert '\n' in paragraphs into <br>
     linkify:      false,        // Autoconvert URL-like text to links
-  
+
     // Enable some language-neutral replacement + quotes beautification
     typographer:  false,
-  
+
     // Double + single quotes replacement pairs, when typographer enabled,
     // and smartquotes on. Could be either a String or an Array.
     //
@@ -160,8 +158,8 @@ module.exports = {
     scrollBehavior(to, from, savedPosition) {
       if (to.hash) {
         setTimeout(() => {
-          window.scrollTo({ 
-            top: document.querySelector(to.hash).offsetTop, 
+          window.scrollTo({
+            top: document.querySelector(to.hash).offsetTop,
             behavior: 'smooth'
           });
         },100);

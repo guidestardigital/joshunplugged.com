@@ -1,9 +1,7 @@
-
 @import './flex.scss';
 @import './variables.scss';
 @import './layout.scss';
 @import './header.scss';
-@import './story-cards-container.scss';
 @import './story-card.scss';
 @import './blog-post.scss';
 @import './loader.scss';
@@ -12,43 +10,9 @@
 @import './register.scss';
 @import './comment-thread.scss';
 
-html {
-  width: 100%;
-  height: 100%;
-  margin:0;
-  padding:0;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-body {
-  background: $color_white;
-  width: 100%;
-  height: 100%;
-  font-size: 14px;
-  margin: 0;
-
-  .body {
-    background: $color_white;
-  }
-}
-
 .footer-backdrop {
   background: $color_theme_3;
   min-height: 100vh;
-}
-
-.uk-link, a {
-  color: $color_black;
-  text-decoration: underline;
-
-  &:hover {
-    color: $color_theme_2;
-  }
-
-  &:visited {
-    color: $color_grey_dark;
-  }
 }
 
 .blog-posts {
@@ -123,7 +87,7 @@ body {
   border-top: 2px solid $color_grey_superlight;
   padding: 1rem;
 
-  .related-links {  
+  .related-links {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +123,7 @@ ul {
 .blog-title-section {
   h1, h2 {
     text-align: center;
-    
+
   }
 }
 

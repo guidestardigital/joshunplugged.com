@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+a {
+  color: $color_black;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color_theme_2;
+  }
+
+  &:visited {
+    color: $color_grey_dark;
+  }
+
+  &.selected {
+    font-weight: bold;
+  }
+}

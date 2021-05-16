@@ -1,27 +1,27 @@
 <template>
-  <div class="page-header" 
+  <div class="page-header"
        id="page-header">
     <div class="logo">
       <a href="/">Josh Unplugged</a>
     </div>
     <div class="controls">
       <div class="categories">
-        <nuxt-link to="/">Home</nuxt-link>
-        <nuxt-link :to="{ name: 'bookReviews' }">Book Reviews</nuxt-link>
-        <nuxt-link :to="{ name: 'people' }">People</nuxt-link>
-        <nuxt-link v-for="blogPostCategory in blogPostCategories" 
-                    v-bind:key="blogPostCategory.id" 
-                    :to="{ name: 'blogPostCategories-id', params: { id: blogPostCategory.id }}"
+        <nuxt-link to="/"><i class="fas fa-home"/></nuxt-link>
+        <nuxt-link :to="{ name: 'books' }"><i class="fas fa-book-open" />&nbsp;Book Reviews</nuxt-link>
+        <nuxt-link :to="{ name: 'people' }"><i class="fas fa-user-friends"/>&nbsp;People</nuxt-link>
+        <nuxt-link v-for="blogPostCategory in blogPostCategories"
+                    v-bind:key="blogPostCategory.id"
+                    :to="{ name: 'categories-slug', params: { slug: blogPostCategory.slug }}"
                    >{{ blogPostCategory.name }}</nuxt-link>
+        <a v-on:click="logout()"
+           v-if="user">Logout</a>
+        <a href="/login"
+           v-else>Login</a>
       </div>
       <div class="auth">
         <div class="username" v-if="user">
           Welcome, {{user.username}}
         </div>
-        <a v-on:click="logout()"
-           v-if="user">Logout</a>
-        <a href="/login"
-           v-else>Login</a>
       </div>
     </div>
   </div>
@@ -30,6 +30,7 @@
 <script>
   import blogPostCategoriesQuery from "~/apollo/queries/category/blogPostCategories";
   import Links from "~/components/Links";
+  import './Header.scss';
 
   export default {
     components: {

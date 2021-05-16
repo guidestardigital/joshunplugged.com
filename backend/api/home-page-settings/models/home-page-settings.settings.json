@@ -1,0 +1,17 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_page_settings",
+  "info": {
+    "name": "Home Page Settings"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "featured_blog_series": {
+      "model": "blog-series"
+    }
+  }
+}

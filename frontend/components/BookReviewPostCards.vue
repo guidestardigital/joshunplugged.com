@@ -1,16 +1,16 @@
 <template>
-  <div class="story-cards-container">
+  <div class="book-review-post-cards">
     <div v-for="bookReview in bookReviewsSorted"
          :key="bookReview.id">
       <div class="story-card">
         <div class="image-container contain">
-          <img :src="bookReview.cover.url" 
-                :alt="bookReview.title" 
+          <img :src="bookReview.cover.url"
+                :alt="bookReview.title"
                 class="image"
                 v-if="bookReview.cover" />
         </div>
         <div class="text-block">
-          <nuxt-link :to="{ name: 'bookReviews-slug', params: {slug: bookReview.slug} }"
+          <nuxt-link :to="{ name: 'books-slug', params: {slug: bookReview.slug} }"
                         class="story-title">{{ bookReview.title }}</nuxt-link>
           <div class="date-count-block">
             <div class="date"
@@ -44,6 +44,7 @@
 <script>
   import moment from 'moment';
   import Rating from '~/components/Rating';
+  import './BookReviewPostCards.scss';
 
   export default {
     methods: {

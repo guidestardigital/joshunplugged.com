@@ -1,5 +1,5 @@
 <template>
-  <div class="image-container" v-if="images && images[0] && images[0].image">
+  <div class="image-by-target" v-if="images && images[0] && images[0].image">
     <img class="image" :src="imageBaseUri + images[0].image.url"  />
     <div class="description" v-if="!!images[0].description">{{ images[0].description }}</div>
   </div>

@@ -2,6 +2,7 @@ query BlogPostCategories {
   blogPostCategories {
     id
     name
+    slug
     description
     blog_posts {
       id

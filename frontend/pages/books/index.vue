@@ -1,11 +1,11 @@
 <template>
   <Loader :loading="loading || !bookReviews">
-    <div class="book-reviews" v-if="!!bookReviews">
+    <div class="page book-reviews" v-if="!!bookReviews">
       <div class="hero book-reviews-hero"
            style="background-image: url(https://joshoncode.s3.us-east-2.amazonaws.com/library_shelves_3b1e5330c5.jpg?291148.354999983);">
       </div>
-      <div class="layout-content">
-        <div class="content-header">
+      <div class="contents">
+        <div class="header">
           <div class="content-title-block">
             <div class="content-title">Book Reviews</div>
             <div class="content-description"><TextByTag tag="book_reviews_page"></TextByTag></div>
@@ -30,7 +30,7 @@
   import Loader from "~/components/Loader";
   import TextByTag from "~/components/TextByTag";
   import { publishedAt } from '~/util/dates';
-  
+
   export default {
     data() {
       return {

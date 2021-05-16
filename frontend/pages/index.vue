@@ -1,21 +1,20 @@
 <template>
-  <div>
-    <div class="hero-image">
-      <ImageSingle target="hero_image" />
-    </div>
-    <div class="layout-content">
+  <div class="page home">
+    <featured-blog-series v-if="featuredBlogSeries"
+                          :blog-series="featuredBlogSeries" />
+    <div class="contents">
       <div class="content-section">
-        <div class="section-title">Series</div>
+        <div class="section-title">Blog Series</div>
         <BlogSeriessCards :blogSeriess="blogSeries" />
       </div>
       <div class="content-section">
         <div class="section-title">Latest Posts</div>
-        <BlogPostsCards v-if="blogPosts" 
+        <BlogPostsCards v-if="blogPosts"
                         :blogPosts="blogPosts.filter(bp => !bp.show_in_series_only)" />
       </div>
       <div class="content-section">
         <div class="section-title">Book Reviews</div>
-        <BookReviewPostCards v-if="bookReviews" 
+        <BookReviewPostCards v-if="bookReviews"
                              :bookReviews="bookReviews" />
       </div>
     </div>
@@ -26,11 +25,14 @@
 import blogPostsQuery from '~/apollo/queries/blogPost/blogPosts'
 import blogSeriessQuery from '~/apollo/queries/blogSeries/blogSeriess'
 import bookReviewsQuery from '~/apollo/queries/bookReview/bookReviews'
-
+import homePageSettings from '~/apollo/queries/homePageSettings.gql';
 import BlogPostsCards from '~/components/BlogPostsCards'
 import BlogSeriessCards from '~/components/BlogSeriessCards'
 import BookReviewPostCards from '~/components/BookReviewPostCards'
-import ImageSingle from '~/components/ImageSingle'
+import ImageByTarget from '~/components/images/ImageByTarget';
+
+import './index.scss';
+import FeaturedBlogSeries from '~/components/blogSeries/FeaturedBlogSeries';
 
 export default {
   data () {
@@ -40,22 +42,32 @@ export default {
     }
   },
   components: {
+    FeaturedBlogSeries,
     BlogPostsCards,
     BlogSeriessCards,
     BookReviewPostCards,
-    ImageSingle
+    ImageByTarget
+  },
+  computed: {
+    featuredBlogSeries() {
+      return this.homePageSetting ? this.homePageSetting.featured_blog_series : undefined;
+    }
   },
   apollo: {
+    homePageSetting: {
+      prefetch: true,
+      query: homePageSettings
+    },
     blogPosts: {
-      prefetch: false,
+      prefetch: true,
       query: blogPostsQuery
     },
     blogSeries: {
-      prefetch: false,
+      prefetch: true,
       query: blogSeriessQuery
     },
     bookReviews: {
-      prefetch: false,
+      prefetch: true,
       query: bookReviewsQuery
     }
   },

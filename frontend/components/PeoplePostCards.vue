@@ -1,11 +1,11 @@
 <template>
-  <div class="story-cards-container">
+  <div class="people-cards">
     <div v-for="person in peopleSorted"
          :key="person.id">
-      <div class="story-card">
+      <div class="person-card">
         <div class="image-container contain">
-          <img :src="person.avatar.url" 
-                :alt="person.title" 
+          <img :src="person.avatar.url"
+                :alt="person.title"
                 class="image"
                 v-if="person.avatar" />
         </div>
@@ -18,7 +18,7 @@
           </div>
           <div class="item"
                v-if="person.homepage">
-            <a :href="person.homepage.url" 
+            <a :href="person.homepage.url"
                target="_blank">{{ person.homepage.url }}</a>
           </div>
         </div>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+  import './PeoplePostCards.scss';
+
   export default {
     computed: {
       peopleSorted() {

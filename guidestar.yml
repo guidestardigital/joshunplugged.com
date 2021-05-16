@@ -48,7 +48,7 @@ resources:
         AWS_ACCESS_KEY_ID: "{{{account.aws.accessKeyId}}}"
         AWS_ACCESS_SECRET: "{{{account.aws.accessSecret}}}"
         AWS_S3_REGION: "{{{blobStorage.strapi-images.region}}}"
-        AWS_S3_BUCKET: "{{{blobStorage.strapi-images.bucket}}}"
+        AWS_S3_BUCKET: "joshoncode"
         NODE_ENV: "{{{environment.name}}}"
         MAILGUN_API_KEY: "{{{api.mailgun.apiKey}}}"
         DEEP_AI_API_KEY: "{{{api.deepAi.apiKey}}}"

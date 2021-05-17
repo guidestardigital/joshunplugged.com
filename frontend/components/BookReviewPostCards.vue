@@ -2,7 +2,7 @@
   <div class="book-review-post-cards">
     <div v-for="bookReview in bookReviewsSorted"
          :key="bookReview.id">
-      <div class="story-card">
+      <div class="book-card">
         <div class="image-container contain">
           <img :src="bookReview.cover.url"
                 :alt="bookReview.title"

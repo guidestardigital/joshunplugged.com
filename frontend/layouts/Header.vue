@@ -6,16 +6,20 @@
     </div>
     <div class="controls">
       <div class="categories">
-        <nuxt-link to="/"><i class="fas fa-home"/></nuxt-link>
-        <nuxt-link :to="{ name: 'books' }"><i class="fas fa-book-open" />&nbsp;Book Reviews</nuxt-link>
-        <nuxt-link :to="{ name: 'people' }"><i class="fas fa-user-friends"/>&nbsp;People</nuxt-link>
+        <nuxt-link to="/" class="button"><i class="fas fa-home"/></nuxt-link>
+        <nuxt-link :to="{ name: 'books' }" class="button"><i class="fas fa-book-open" />&nbsp;Book Reviews</nuxt-link>
+        <nuxt-link :to="{ name: 'people' }" class="button"><i class="fas fa-user-friends"/>&nbsp;People</nuxt-link>
         <nuxt-link v-for="blogPostCategory in blogPostCategories"
-                    v-bind:key="blogPostCategory.id"
-                    :to="{ name: 'categories-slug', params: { slug: blogPostCategory.slug }}"
-                   >{{ blogPostCategory.name }}</nuxt-link>
+                   class="button"
+                   v-bind:key="blogPostCategory.id"
+                   :to="{ name: 'categories-slug', params: { slug: blogPostCategory.slug }}">
+          {{ blogPostCategory.name }}
+        </nuxt-link>
         <a v-on:click="logout()"
+           class="button"
            v-if="user">Logout</a>
         <a href="/login"
+           class="button"
            v-else>Login</a>
       </div>
       <div class="auth">

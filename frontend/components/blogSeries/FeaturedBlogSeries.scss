@@ -11,7 +11,9 @@
     flex-direction: column;
   }
 
-  border-bottom: 1px solid $color-grey;
+  background: $color-grey;
+  color: $color-white;
+
   .image-container {
     overflow: hidden;
     position: relative;

@@ -23,18 +23,12 @@
         bodyMarginTop: 1
       };
     },
-    methods: {
-      onResize(event) {
-        this.$nextTick(() => {
-          const header = document.getElementById('page-header');
-          this.bodyMarginTop = header.offsetHeight;
-          this.$forceUpdate();
-        })
-      }
-    },
     mounted() {
-      window.addEventListener('resize', this.onResize);
-      this.onResize();
+      setInterval(() => {
+        const header = document.getElementById('page-header');
+        this.bodyMarginTop = header.offsetHeight;
+        this.$forceUpdate();
+      }, 500);
 
       // Setup Apollo Login JWT token, on startup
       if (this.$auth.strategy.token.get()) {

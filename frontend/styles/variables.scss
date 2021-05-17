@@ -3,13 +3,13 @@ $color_theme_2: #0f4c75;
 $color_theme_3: #0f4c75;
 $color_theme_4: #3282b8;
 $color_theme_5: #3282b8;
-$color_white: #fefefe;
-$color_white_transparent: rgba(240,240,240, 0.85);
-$color_grey_superlight: #eeeeee;
-$color_grey: #bbb;
-$color_grey_light: #ddd;
-$color_grey_dark: #666;
-$color_black: #222;
+$color_white: #fefef0;
+$color_white_transparent: rgba(240,240,255, 0.85);
+$color_grey_superlight: #eeeefc;
+$color_grey: #bbbbbf;
+$color_grey_light: #dde;
+$color_grey_dark: #667;
+$color_black: #223;
 $color_red: #EE1111;
 $color_green: #11AA11;
 
@@ -24,3 +24,6 @@ $size-8: 3.4rem;
 $size-9: 5.5rem;
 
 $breakpoint-mobile: 699px;
+
+$font-family-title: 'Montserrat', sans-serif;
+$font-family-text: 'Newsreader', serif;

@@ -2,7 +2,7 @@
   <div class="page home">
     <featured-blog-series v-if="featuredBlogSeries"
                           :blog-series="featuredBlogSeries" />
-    <div class="contents">
+    <div class="contents shadow">
       <div class="content-section">
         <div class="section-title">Blog Series</div>
         <BlogSeriessCards :blogSeriess="blogSeries" />

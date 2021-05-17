@@ -3,7 +3,7 @@
     <div v-for="blogPost in blogPostsSorted"
          :style="{'background-color': blogPost.background_color}"
          :key="blogPost.id">
-      <div class="story-card">
+      <div class="post-card">
           <div class="image-container">
             <image-sized :image="blogPost.image_header" size="small" />
           </div>
@@ -17,7 +17,7 @@
               <div class="count"
                    v-if="!!blogPost.blog_series">{{blogPost.blog_series_order}} of {{blogPost.blog_series.blog_posts.length}}
                 <nuxt-link v-if="showSeriesLink"
-                             :to="{ name: 'blogSeries-slug', params: {slug: blogPost.blog_series.slug} }"
+                             :to="{ name: 'series-slug', params: {slug: blogPost.blog_series.slug} }"
                              class="story-title">in {{blogPost.blog_series.title}}</nuxt-link>
               </div>
             </div>

@@ -1,68 +1,65 @@
 <template>
-  <Loader :loading="loading || !bookReview">
-    <div class="page book-review" v-if="bookReview">
-      <div class="contents" id="top">
-        <div class="header">
-          <div class="content-title-block">
-            <div class="content-super-title"><nuxt-link :to="{ name: 'books'}">Book Review</nuxt-link></div>
-            <div class="content-title">{{ bookReview.title }}</div>
-            <div class="content-sub-block-horizontal-wrapped">
-              <div class="content-horizontal item">
-                <Rating :rating="bookReview.rating" />
-              </div>
-              <div class="content-horizontal item" v-if="bookPublishedDateFormatted">Published {{ bookPublishedDateFormatted }}</div>
-              <div class="content-horizontal item"
-                    v-if="bookReview.authors && bookReview.authors.filter(a => a.public).length">
-                Author(s):&nbsp;
-                <nuxt-link v-for="person in bookReview.authors.filter(a => a.public)"
-                          :key="person.id"
-                          :to="{ name: 'person-slug', params: {slug: person.slug} }">{{person.first_name}} {{person.last_name}}</nuxt-link>
-              </div>
-              <div class="content-horizontal item"
-                    v-if="bookReview.topics">
-                Topics:
-                <div class="chip" v-for="topic in  bookReview.topics.split(',')" :key="topic">{{ topic }}</div>
-              </div>
+  <div class="page book-review" v-if="bookReview">
+    <div class="contents" id="top">
+      <div class="header">
+        <div class="content-title-block">
+          <div class="content-title">{{ bookReview.title }}</div>
+          <div class="content-sub-block-horizontal-wrapped">
+            <div class="content-horizontal item">
+              <Rating :rating="bookReview.rating" />
             </div>
-            <div class="content-date" v-if="publishedAtFormatted">Review written {{ publishedAtFormatted }}</div>
-            <div class="content-title-image" v-if="bookReview.cover">
-              <img :src="bookReview.cover.url" />
+            <div class="content-horizontal item" v-if="bookPublishedDateFormatted">Published {{ bookPublishedDateFormatted }}</div>
+            <div class="content-horizontal item"
+                  v-if="bookReview.authors && bookReview.authors.filter(a => a.public).length">
+              Author(s):&nbsp;
+              <nuxt-link v-for="person in bookReview.authors.filter(a => a.public)"
+                        :key="person.id"
+                        :to="{ name: 'person-slug', params: {slug: person.slug} }">{{person.first_name}} {{person.last_name}}</nuxt-link>
+            </div>
+            <div class="content-horizontal item"
+                  v-if="bookReview.topics">
+              Topics:
+              <div class="chip" v-for="topic in  bookReview.topics.split(',')" :key="topic">{{ topic }}</div>
             </div>
           </div>
-        </div>
-
-        <div class="content-section"
-            v-if="bookReview.content" >
-          <div class="section-title center">Review</div>
-          <div class="blog-markdown-content"
-              v-html="$md.render(bookReview.content)"></div>
-        </div>
-
-        <div class="content-section"
-            v-if="bookReview.opinion">
-          <div class="section-title center">Opinion</div>
-          <div class="blog-markdown-content"
-              v-html="$md.render(bookReview.opinion)"></div>
-        </div>
-
-        <div class="content-section"
-            v-if="bookReviewQuotesSorted">
-          <div class="section-title center">Book Quotes</div>
-          <Quote :quote="quote"
-                :key="quote.id"
-                :showLocation="true"
-                v-for="quote in bookReview.quotes" />
-        </div>
-
-        <div class="content-section" id="comments">
-          <!-- Comment Thread -->
-          <CommentThread :threadId="bookReview.comment_thread ? bookReview.comment_thread.id : '-1'"
-                        :key="commentThreadKey"
-                        @replyCreated="commentThread_replyCreated" />
+          <div class="content-date" v-if="publishedAtFormatted">Review written {{ publishedAtFormatted }}</div>
+          <div class="content-title-image" v-if="bookReview.cover">
+            <img :src="bookReview.cover.url" />
+          </div>
         </div>
       </div>
+
+      <div class="content-section"
+          v-if="bookReview.content" >
+        <div class="section-title center">Review</div>
+        <div class="blog-markdown-content"
+            v-html="$md.render(bookReview.content)"></div>
+      </div>
+
+      <div class="content-section"
+          v-if="bookReview.opinion">
+        <div class="section-title center">Opinion</div>
+        <div class="blog-markdown-content"
+            v-html="$md.render(bookReview.opinion)"></div>
+      </div>
+
+      <div class="content-section"
+          v-if="bookReviewQuotesSorted">
+        <div class="section-title center">Book Quotes</div>
+        <Quote :quote="quote"
+              :key="quote.id"
+              :showLocation="true"
+              v-for="quote in bookReview.quotes" />
+      </div>
+
+      <div class="content-section" id="comments">
+        <!-- Comment Thread -->
+        <CommentThread :threadId="bookReview.comment_thread ? bookReview.comment_thread.id : '-1'"
+                      :key="commentThreadKey"
+                      @replyCreated="commentThread_replyCreated" />
+      </div>
     </div>
-  </Loader>
+  </div>
 </template>
 
 <script>

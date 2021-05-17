@@ -1,5 +1,5 @@
 <template>
-  <div class="featured-blog-series">
+  <div class="featured-blog-series inverted">
     <div class="image-container">
       <image-sized :image="blogSeries.image_header" />
       <div class="svg" v-if="showStarSvg">

@@ -9,7 +9,7 @@
     max-width: calc(100vw - #{$size-5 * 2});
   }
 
-  .series-card {
+  .post-card {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -18,7 +18,7 @@
     .image-container {
       display: flex;
       flex-direction: column;
-      margin-right: $size-7;
+      margin-right: $size-5;
       flex: 0 0 200px;
       max-height: 133px;
       position: relative;
@@ -64,6 +64,7 @@
       .date-count-block {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         flex-direction: row;
         margin-top: $size-4;
 

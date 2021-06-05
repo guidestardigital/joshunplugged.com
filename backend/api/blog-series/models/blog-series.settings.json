@@ -19,8 +19,8 @@
       "type": "richtext"
     },
     "blog_posts": {
-      "collection": "blog-post",
-      "via": "blog_series"
+      "via": "blog_series",
+      "collection": "blog-post"
     },
     "blog_post_categories": {
       "via": "blog_series",

@@ -1,0 +1,167 @@
+@import '../../styles/variables.scss';
+
+.page.timeline {
+  padding: $size-7;
+
+  @media only screen and (max-width: $breakpoint-mobile) {
+    padding: $size-5;
+  }
+
+  .vertical-timeline {
+    margin-top: $size-5;
+
+    .label {
+      margin-right: $size-5;
+
+      @media only screen and (max-width: $breakpoint-mobile) {
+        margin-right: $size-4;
+      }
+    }
+
+    .years {
+      .year {
+        display: flex;
+        flex-direction: row;
+        margin-top: $size-7;
+
+        > .label {
+          font-size: 24px;
+
+          @media only screen and (max-width: $breakpoint-mobile) {
+            font-size: 16px;
+          }
+        }
+
+        .months {
+          width: 100%;
+
+          .month {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+
+            &:not(:last-child) {
+              margin-bottom: $size-5;
+            }
+
+            > .label {
+              font-size: 18px;
+              width: 40px;
+
+              @media only screen and (max-width: $breakpoint-mobile) {
+                font-size: 14px;
+                width: 30px;
+              }
+            }
+
+            .dates {
+              width: 100%;
+
+              .date {
+                display: flex;
+                flex-direction: row;
+
+                &:not(:last-child) {
+                  margin-bottom: $size-5;
+                }
+
+                > .label {
+                  font-size: 18px;
+                  width: 40px;
+
+                  @media only screen and (max-width: $breakpoint-mobile) {
+                    font-size: 14px;
+                    width: 30px;
+                  }
+                }
+
+                .entries {
+                  width: 100%;
+
+                  .entry {
+                    width: calc(100% - #{$size-5});
+                    padding-left: $size-5;
+                    border-left: 1px solid $color_grey;
+
+                    .header {
+                      width: 100%;
+                      padding: 0 $size-2;
+                      cursor: pointer;
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: space-between;
+                      align-items: center;
+                      font-size: 18px;
+
+                      @media only screen and (max-width: $breakpoint-mobile) {
+                        font-size: 14px;
+                      }
+
+                      &:hover {
+                        font-weight: bold;
+                      }
+                    }
+
+                    .content {
+                      margin: 0 $size-2;
+                      width: 100%;
+                      max-height: 0;
+                      overflow: hidden;
+
+                      &.expanded {
+                        margin: $size-5 $size-2;
+                        max-height: 800px;
+                      }
+
+                      h3 {
+                        margin: 0;
+
+                        @media only screen and (max-width: $breakpoint-mobile) {
+                          font-size: 14px;
+                        }
+                      }
+
+                      .description {
+                        margin-bottom: $size-5;
+                      }
+
+                      .blog-posts {
+                        .blog-post {
+
+                          a {
+                            padding: $size-5;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            @media only screen and (max-width: $breakpoint-mobile) {
+                              padding: $size-2;
+                            }
+
+                            img {
+                              max-height: 250px;
+                              max-width: 250px;
+
+                              @media only screen and (max-width: $breakpoint-mobile) {
+                                max-height: 150px;
+                                max-width: 150px;
+                              }
+                            }
+
+                            &:hover {
+                              background: $color-grey_superlight;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

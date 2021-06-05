@@ -1,0 +1,35 @@
+query Timeline($slug: String!) {
+  timelines(where: { slug: $slug }) {
+    id
+    slug
+    title
+    description
+    timeline_entries {
+      id
+      title
+      description
+      year
+      month
+      date
+      blog_posts {
+        id
+        slug
+        title
+        description
+        tagline
+        image_header {
+          id
+          url
+          formats
+        }
+      }
+      links {
+        id
+        title
+        url
+        key
+        target
+      }
+    }
+  }
+}

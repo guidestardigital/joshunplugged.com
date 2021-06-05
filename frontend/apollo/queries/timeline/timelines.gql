@@ -1,0 +1,8 @@
+query Timelines {
+  timelines {
+    id
+    title
+    description
+    slug
+  }
+}

@@ -4,6 +4,10 @@
                           :blog-series="featuredBlogSeries" />
     <div class="contents shadow">
       <div class="content-section">
+        <div class="section-title">Timelines</div>
+        <TimelineCards :timelines="timelines" />
+      </div>
+      <div class="content-section">
         <div class="section-title">Blog Series</div>
         <BlogSeriessCards :blogSeriess="blogSeries" />
       </div>
@@ -23,6 +27,7 @@
 
 <script>
 import blogPostsQuery from '~/apollo/queries/blogPost/blogPosts'
+import timelinesQuery from '~/apollo/queries/timeline/timelines.gql'
 import blogSeriessQuery from '~/apollo/queries/blogSeries/blogSeriess'
 import bookReviewsQuery from '~/apollo/queries/bookReview/bookReviews'
 import homePageSettings from '~/apollo/queries/homePageSettings.gql';
@@ -33,15 +38,18 @@ import ImageByTarget from '~/components/images/ImageByTarget';
 
 import './index.scss';
 import FeaturedBlogSeries from '~/components/blogSeries/FeaturedBlogSeries';
+import TimelineCards from '~/components/cards/TimelineCards';
 
 export default {
   data () {
     return {
       blogPosts: [],
-      blogSeries: []
+      blogSeries: [],
+      timelines: []
     }
   },
   components: {
+    TimelineCards,
     FeaturedBlogSeries,
     BlogPostsCards,
     BlogSeriessCards,
@@ -69,13 +77,17 @@ export default {
     bookReviews: {
       prefetch: true,
       query: bookReviewsQuery
+    },
+    timelines: {
+      prefetch: true,
+      query: timelinesQuery
     }
   },
   head () {
     return {
       title:'Josh Unplugged',
       meta: [
-        { hid: 'description', name: 'description', content: 'Life, Paranormal, Politics, and Theology. All in one place.' }
+        { hid: 'description', name: 'description', content: 'Life, Paranormal, UFOs, UAPs, Religion, and Theology. All in one place.' }
       ]
     }
   }

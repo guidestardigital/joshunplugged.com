@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timeline_entries",
+  "info": {
+    "name": "Timeline Entry",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "year": {
+      "type": "integer"
+    },
+    "month": {
+      "type": "integer"
+    },
+    "date": {
+      "type": "integer"
+    },
+    "blog_posts": {
+      "via": "timeline_entries",
+      "collection": "blog-post",
+      "dominant": true
+    },
+    "links": {
+      "collection": "link",
+      "via": "timeline_entries",
+      "dominant": true
+    },
+    "timelines": {
+      "via": "timeline_entries",
+      "collection": "timeline"
+    },
+    "date_estimated": {
+      "type": "boolean"
+    }
+  }
+}

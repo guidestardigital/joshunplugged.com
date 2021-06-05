@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timelines",
+  "info": {
+    "name": "Timeline",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "timeline_entries": {
+      "via": "timelines",
+      "collection": "timeline-entry",
+      "dominant": true
+    }
+  }
+}

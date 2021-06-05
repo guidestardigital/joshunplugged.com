@@ -30,7 +30,8 @@
       "model": "file",
       "via": "related",
       "plugin": "upload",
-      "required": false
+      "required": false,
+      "pluginOptions": {}
     },
     "author": {
       "plugin": "users-permissions",
@@ -86,6 +87,10 @@
     },
     "slug": {
       "type": "string"
+    },
+    "timeline_entries": {
+      "via": "blog_posts",
+      "collection": "timeline-entry"
     }
   }
 }

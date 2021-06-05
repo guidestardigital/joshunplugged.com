@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/timeline-entries",
+      "handler": "timeline-entry.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/timeline-entries/count",
+      "handler": "timeline-entry.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/timeline-entries/:id",
+      "handler": "timeline-entry.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/timeline-entries",
+      "handler": "timeline-entry.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/timeline-entries/:id",
+      "handler": "timeline-entry.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/timeline-entries/:id",
+      "handler": "timeline-entry.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

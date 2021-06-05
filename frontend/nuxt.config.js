@@ -153,7 +153,10 @@ module.exports = {
   },
   publicRuntimeConfig: {
     apiDomain: process.env.API_DOMAIN,
-    buildVersion: process.env.BUILD_VERSION || 'development'
+    buildVersion: process.env.BUILD_VERSION || 'development',
+    googleAnalytics: {
+      id: process.env.GOOGLE_ANALYTICS_ID
+    }
   },
   router: {
     scrollBehavior(to, from, savedPosition) {

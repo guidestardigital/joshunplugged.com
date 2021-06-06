@@ -1,38 +1,44 @@
 <template>
   <div class="page timeline">
-    <h1>{{timelineTitle}}</h1>
-    <div class="description">{{timelineDescription}}</div>
-    <div class="vertical-timeline">
-      <div class="years">
-        <div v-for="year in years" class="year">
-          <div class="label">{{year.label}}</div>
-          <div class="months">
-            <div v-for="month in year.months" class="month">
-              <div class="label">{{month.label}}</div>
-              <div class="dates">
-                <div v-for="date in month.dates" class="date">
-                  <div class="label">{{date.label}}</div>
-                  <div class="entries">
-                    <div class="entry" v-for="entry in date.entries">
-                      <div class="header" @click="entryHeader_clickHandler(entry)">
-                        <div class="title">{{entry.title}}</div>
-                        <tags :tags="entry.tags" />
-                        <i v-if="!entry.expanded" class="fas fa-chevron-right" />
-                        <i v-if="entry.expanded" class="fas fa-chevron-down" />
-                      </div>
-                      <div :class="entryClass(entry)">
-                        <div class="description">{{entry.description}}</div>
-                        <div class="blog-posts" v-if="entry.blog_posts.length">
-                          <div class="blog-post" v-for="blogPost in entry.blog_posts" :key="blogPost.id">
-                            <nuxt-link :to="{ name: 'posts-slug', params: {slug: blogPost.slug} }">
-                              <img :src="headerImageUrl(blogPost)" />
-                              {{ blogPost.title }}
-                            </nuxt-link>
+    <div class="contents">
+      <div class="content-section wide">
+        <h1>{{timelineTitle}}</h1>
+        <div class="description">{{timelineDescription}}</div>
+        <div class="vertical-timeline">
+          <div class="years">
+            <div v-for="year in years" class="year">
+              <div class="label">{{year.label}}</div>
+              <div class="months">
+                <div v-for="month in year.months" class="month">
+                  <div class="label">{{month.label}}</div>
+                  <div class="dates">
+                    <div v-for="date in month.dates" class="date">
+                      <div class="label">{{date.label}}</div>
+                      <div class="entries">
+                        <div class="entry" v-for="entry in date.entries">
+                          <div class="header" @click="entryHeader_clickHandler(entry)">
+                            <div class="title">{{entry.title}}</div>
+                            <div class="flex row flex-align-items-center">
+                              <tags :tags="entry.tags" />
+                              <i v-if="!entry.expanded" class="fas fa-chevron-right" />
+                              <i v-if="entry.expanded" class="fas fa-chevron-down" />
+                            </div>
                           </div>
-                        </div>
-                        <div class="links" v-if="entry.links.length">
-                          <div class="link" v-for="link in entry.links" :key="link.id">
-                            <a :href="link.url" :target="link.target">{{link.title}}</a>
+                          <div :class="entryClass(entry)">
+                            <div class="description">{{entry.description}}</div>
+                            <div class="blog-posts" v-if="entry.blog_posts.length">
+                              <div class="blog-post" v-for="blogPost in entry.blog_posts" :key="blogPost.id">
+                                <nuxt-link :to="{ name: 'posts-slug', params: {slug: blogPost.slug} }">
+                                  <img :src="headerImageUrl(blogPost)" />
+                                  {{ blogPost.title }}
+                                </nuxt-link>
+                              </div>
+                            </div>
+                            <div class="links" v-if="entry.links.length">
+                              <div class="link" v-for="link in entry.links" :key="link.id">
+                                <a :href="link.url" :target="link.target">{{link.title}}</a>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -43,11 +49,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="contents">
-      <div class="content-section">
-
       </div>
     </div>
   </div>

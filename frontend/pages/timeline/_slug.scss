@@ -41,7 +41,7 @@
             flex-direction: row;
 
             &:not(:last-child) {
-              margin-bottom: $size-5;
+              margin-bottom: $size-7;
             }
 
             > .label {
@@ -99,6 +99,9 @@
                         font-size: 14px;
                       }
 
+                      .tags {
+                        margin-right: $size-4;
+                      }
                       &:hover {
                         font-weight: bold;
                       }

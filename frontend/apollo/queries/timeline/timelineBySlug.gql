@@ -11,6 +11,22 @@ query Timeline($slug: String!) {
       year
       month
       date
+      images {
+        id
+        formats
+        url
+      }
+      tags {
+        id
+        title
+        color
+        icon {
+          id
+          formats
+          url
+        }
+        icon_class
+      }
       blog_posts {
         id
         slug

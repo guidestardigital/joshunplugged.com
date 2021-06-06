@@ -28,12 +28,11 @@
     }
 
     .description {
-      font-size: 12px;
       text-decoration: none;
       margin-left: $size-5;
 
       @media only screen and (max-width: $breakpoint-mobile) {
-        font-size: 11px;
+        font-size: 13px;
       }
     }
   }

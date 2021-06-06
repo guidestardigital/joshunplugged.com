@@ -16,6 +16,7 @@
                     <div class="entry" v-for="entry in date.entries">
                       <div class="header" @click="entryHeader_clickHandler(entry)">
                         <div class="title">{{entry.title}}</div>
+                        <tags :tags="entry.tags" />
                         <i v-if="!entry.expanded" class="fas fa-chevron-right" />
                         <i v-if="entry.expanded" class="fas fa-chevron-down" />
                       </div>
@@ -55,10 +56,12 @@
 import './_slug.scss';
 import timelineBySlugQuery from '~/apollo/queries/timeline/timelineBySlug.gql';
 import {imageToSize} from '~/util/imageUtilFrontend';
+import Tags from '~/components/Tags';
 
 const MONTHS = [undefined, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export default {
+  components: {Tags},
   data() {
     return {
       timelines: undefined,

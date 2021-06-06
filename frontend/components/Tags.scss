@@ -1,0 +1,23 @@
+@import '../styles/variables.scss';
+
+.tags {
+  display: flex;
+  flex-direction: row;
+
+  .tag {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 $size-2;
+    padding: $size-1 $size-3;
+    font-size: 11px;
+    border-radius: 100px;
+    border: 1px solid $color_black;
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+      font-size: 10px;
+    }
+  }
+}

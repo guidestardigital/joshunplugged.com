@@ -4,5 +4,10 @@ query Timelines {
     title
     description
     slug
+    image {
+      id
+      formats
+      url
+    }
   }
 }

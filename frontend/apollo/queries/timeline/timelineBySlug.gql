@@ -4,6 +4,11 @@ query Timeline($slug: String!) {
     slug
     title
     description
+    image {
+      id
+      formats
+      url
+    }
     timeline_entries {
       id
       title

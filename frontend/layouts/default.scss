@@ -124,11 +124,19 @@
         }
       }
 
-      &.wide {
-        max-width: 75vw;
-      }
       @media only screen and (max-width: $breakpoint-mobile) {
         margin: $size-6;
+      }
+
+      &.wide {
+        max-width: 75vw;
+
+        @media only screen and (max-width: $breakpoint-mobile) {
+          max-width: calc(100vw - #{$size-4 * 4});
+          margin: $size-4;
+          padding: $size-4;
+          overflow: hidden;
+        }
       }
     }
 
@@ -140,4 +148,5 @@
 
 .footer-backdrop {
   background: $color_theme_3;
+  min-height: calc(100vh - 92px);
 }

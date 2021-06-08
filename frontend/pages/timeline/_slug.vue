@@ -17,15 +17,23 @@
                       <div class="entries">
                         <div class="entry" v-for="entry in date.entries">
                           <div class="header" @click="entryHeader_clickHandler(entry)">
-                            <div class="title">{{entry.title}}</div>
-                            <div class="flex row flex-align-items-center">
-                              <tags :tags="entry.tags" />
-                              <i v-if="!entry.expanded" class="fas fa-chevron-right" />
-                              <i v-if="entry.expanded" class="fas fa-chevron-down" />
+                            <div class="contents">
+                              <div class="title">{{entry.title}}</div>
+                              <div class="flex row flex-align-items-center">
+                                <tags :tags="entry.tags" />
+                              </div>
                             </div>
+                            <i v-if="!entry.expanded" class="fas fa-chevron-right" />
+                            <i v-if="entry.expanded" class="fas fa-chevron-down" />
                           </div>
                           <div :class="entryClass(entry)">
                             <div class="description">{{entry.description}}</div>
+                            <div class="images">
+                              <image-sized :image="image"
+                                           size="small"
+                                           v-for="image in entry.images"
+                                           :key="image.id" />
+                            </div>
                             <div class="blog-posts" v-if="entry.blog_posts.length">
                               <div class="blog-post" v-for="blogPost in entry.blog_posts" :key="blogPost.id">
                                 <nuxt-link :to="{ name: 'posts-slug', params: {slug: blogPost.slug} }">
@@ -58,11 +66,12 @@ import './_slug.scss';
 import timelineBySlugQuery from '~/apollo/queries/timeline/timelineBySlug.gql';
 import {imageToSize} from '~/util/imageUtilFrontend';
 import Tags from '~/components/Tags';
+import ImageSized from '~/components/images/ImageSized';
 
 const MONTHS = [undefined, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export default {
-  components: {Tags},
+  components: {ImageSized, Tags},
   data() {
     return {
       timelines: undefined,

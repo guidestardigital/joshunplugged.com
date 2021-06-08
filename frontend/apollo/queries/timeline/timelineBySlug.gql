@@ -16,6 +16,7 @@ query Timeline($slug: String!) {
       year
       month
       date
+      date_estimated
       images {
         id
         formats

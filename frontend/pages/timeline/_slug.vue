@@ -7,7 +7,9 @@
         <div class="vertical-timeline">
           <div class="years">
             <div v-for="year in years" class="year">
-              <div class="label">{{year.label}}</div>
+              <div class="label">
+                {{year.label}}
+              </div>
               <div class="months">
                 <div v-for="month in year.months" class="month">
                   <div class="label">{{month.label}}</div>
@@ -19,6 +21,7 @@
                           <div class="header" @click="entryHeader_clickHandler(entry)">
                             <div class="contents">
                               <div class="title">{{entry.title}}</div>
+                              <div class="estimated" v-if="entry.date_estimated">Date Estimated</div>
                               <div class="flex row flex-align-items-center">
                                 <tags :tags="entry.tags" />
                               </div>
@@ -109,7 +112,7 @@ export default {
           if (!year) {
             years.push(year = {
               value: entry.year,
-              label: entry.year.toString(),
+              label: entry.year < 0 ? Math.abs(entry.year).toString() + ' BC' : entry.year.toString(),
               months: []
             });
           }
@@ -118,7 +121,7 @@ export default {
           if (!month) {
             year.months.push(month = {
               value: entry.month,
-              label: MONTHS[entry.month],
+              label: entry.month ? MONTHS[entry.month] : '',
               dates: []
             });
 
@@ -129,7 +132,7 @@ export default {
           if (!date) {
             month.dates.push(date = {
               value: entry.date,
-              label: entry.date.toString(),
+              label: entry.date ? entry.date.toString() : '',
               entries: []
             });
 

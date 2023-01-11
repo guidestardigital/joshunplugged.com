@@ -20,7 +20,7 @@
     "bad-words": "^3.0.3",
     "dotenv": "^6.2.0",
     "find-config": "^1.0.0",
-    "knex": "^0.19.5",
+    "knex": "^2.4.0",
     "pg": "^8.0.3",
     "prop-replace": "0.0.3",
     "sqlite3": "latest",
